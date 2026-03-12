@@ -621,18 +621,22 @@ function Footer({ t }) {
 }
 
 function App() {
-  const [lang, setLang] = useState('en')
+  const [lang, setLang] = useState(() => {
+    return typeof window !== 'undefined' && window.__INITIAL_LANG__ ? window.__INITIAL_LANG__ : 'en'
+  })
 
   useEffect(() => {
     const path = window.location.pathname
-    let detectedLang = 'en'
+    let detectedLang = lang
     if (path.startsWith('/zh-TW')) detectedLang = 'zh-TW'
     else if (path.startsWith('/zh')) detectedLang = 'zh'
     else if (path.startsWith('/de')) detectedLang = 'de'
     else if (path.startsWith('/ja')) detectedLang = 'ja'
     else if (path.startsWith('/ko')) detectedLang = 'ko'
     else if (path.startsWith('/es')) detectedLang = 'es'
-    setLang(detectedLang)
+    if (detectedLang !== lang) {
+      setLang(detectedLang)
+    }
     document.documentElement.lang = detectedLang
   }, [])
 
