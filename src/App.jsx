@@ -315,7 +315,7 @@ function Install({ t }) {
               <div className="size-3.5 rounded-full bg-gray-50/20"></div>
               <div className="size-3.5 rounded-full bg-gray-50/20"></div>
             </div>
-            <span className="text-xs uppercase tracking-[0.2em] font-black text-white/80">bash — Quick Install</span>
+            <span className="text-xs uppercase tracking-[0.2em] font-black text-white/80">{t.install.bashInstall || 'bash — Quick Install'}</span>
             <div className="w-12"></div>
           </div>
           <div className="p-6 md:p-10 font-mono text-sm md:text-base lg:text-xl leading-relaxed relative bg-black/40">
