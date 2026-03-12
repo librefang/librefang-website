@@ -59,7 +59,7 @@ function Header({ t }) {
           <a className="hover:text-primary transition-colors" href="#features">{t.nav.features}</a>
           <a className="hover:text-primary transition-colors" href="#comparison">{t.nav.comparison}</a>
           <a className="hover:text-primary transition-colors" href="#install">{t.nav.docs}</a>
-          <a className="flex items-center gap-1 hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang" target="_blank" rel="noopener noreferrer">
+          <a className="flex items-center gap-1 hover:text-primary transition-colors" href="https://github.com/librefang/librefang" target="_blank" rel="noopener noreferrer">
             <span>{t.nav.github}</span>
             <MaterialIcon name="open_in_new" className="text-sm" />
           </a>
@@ -79,7 +79,7 @@ function Header({ t }) {
               ))}
             </div>
           </div>
-          <a href="https://github.com/RightNow-AI/librefang" target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center justify-center size-10 rounded-full bg-white/10 text-gray-200 hover:bg-primary hover:text-white transition-all" aria-label="Star on GitHub">
+          <a href="https://github.com/librefang/librefang" target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center justify-center size-10 rounded-full bg-white/10 text-gray-200 hover:bg-primary hover:text-white transition-all" aria-label="Star on GitHub">
             <svg fill="currentColor" height="20" width="20" viewBox="0 0 256 256">
               <path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68Z"></path>
             </svg>
@@ -138,7 +138,7 @@ function Hero({ t }) {
             <a href="#install" className="bg-primary hover:bg-primary-dark text-white font-extrabold py-5 px-10 rounded-full shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95">
               {t.hero.getStarted}
             </a>
-            <a href="https://github.com/RightNow-AI/librefang" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-white/5 text-gray-100 font-bold py-5 px-10 rounded-full border border-gray-600/50 backdrop-blur-md transition-all hover:scale-105 active:scale-95 flex items-center gap-2 justify-center">
+            <a href="https://github.com/librefang/librefang" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-white/5 text-gray-100 font-bold py-5 px-10 rounded-full border border-gray-600/50 backdrop-blur-md transition-all hover:scale-105 active:scale-95 flex items-center gap-2 justify-center">
               <svg fill="currentColor" height="20" width="20" viewBox="0 0 256 256">
                 <path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68Z"></path>
               </svg>
@@ -342,7 +342,7 @@ function Install({ t }) {
               <h3 className="text-2xl font-extrabold text-white">{t.install.requirements}</h3>
             </div>
             <ul className="space-y-3 text-gray-400">
-              <li className="flex items-center gap-3"><span className="text-primary">•</span> Linux / macOS / Windows</li>
+              <li className="flex items-center gap-3"><span className="text-primary">•</span> {t.install.platforms}</li>
               <li className="flex items-center gap-3"><span className="text-primary">•</span> 64MB RAM minimum (256MB recommended)</li>
               <li className="flex items-center gap-3"><span className="text-primary">•</span> x86_64 or ARM64 architecture</li>
               <li className="flex items-center gap-3"><span className="text-primary">•</span> LLM API Key (12 providers supported)</li>
@@ -359,7 +359,7 @@ function Install({ t }) {
               <li className="flex items-center gap-3"><span className="text-primary">•</span> 7 built-in autonomous Hands</li>
               <li className="flex items-center gap-3"><span className="text-primary">•</span> 10 workflow orchestration templates</li>
               <li className="flex items-center gap-3"><span className="text-primary">•</span> 40 channel adapters (incl. Feishu & DingTalk)</li>
-              <li className="flex items-center gap-3"><span className="text-primary">•</span> Tauri 2.0 native desktop app</li>
+              <li className="flex items-center gap-3"><span className="text-primary">•</span> {t.install.desktopApp}</li>
             </ul>
           </article>
         </div>
@@ -456,16 +456,16 @@ function Footer({ t }) {
           <div className="space-y-6">
             <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">{t.footer.community}</h4>
             <ul className="flex flex-col gap-4 text-gray-400 font-bold">
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/issues" target="_blank" rel="noopener noreferrer">{t.footer.issues}</a></li>
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/discussions" target="_blank" rel="noopener noreferrer">{t.footer.discussions}</a></li>
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/librefang/librefang/issues" target="_blank" rel="noopener noreferrer">{t.footer.issues}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/librefang/librefang/discussions" target="_blank" rel="noopener noreferrer">{t.footer.discussions}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/librefang/librefang" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             </ul>
           </div>
           <div className="space-y-6 hidden sm:block">
             <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">{t.footer.docs}</h4>
             <ul className="flex flex-col gap-4 text-gray-400 font-bold">
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang#readme" target="_blank" rel="noopener noreferrer">{t.footer.quickStart}</a></li>
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">{t.footer.license}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/librefang/librefang#readme" target="_blank" rel="noopener noreferrer">{t.footer.quickStart}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/librefang/librefang/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">{t.footer.license}</a></li>
               <li><a className="hover:text-primary transition-colors" href="/privacy/">{t.footer.privacy}</a></li>
             </ul>
           </div>
