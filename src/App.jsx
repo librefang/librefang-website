@@ -124,7 +124,7 @@ function Header({ t }) {
 }
 
 function Hero({ t }) {
-  const { data: release, isLoading } = useQuery({
+  const { data: release } = useQuery({
     queryKey: ['latestRelease'],
     queryFn: async () => {
       const res = await fetch('https://api.github.com/repos/librefang/librefang/releases/latest')
@@ -149,7 +149,7 @@ function Hero({ t }) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            {isLoading ? <Skeleton className="w-20 h-5 inline-block" /> : version} · Rust-Powered · Open Source
+            {version} · Rust-Powered · Open Source
           </div>
           <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-primary flex items-center justify-center lg:justify-start gap-4">
             <img src="/fox-mascot.png" alt="Librefang Mascot" className="w-16 h-16 md:w-20 md:h-20 rounded-xl" />
