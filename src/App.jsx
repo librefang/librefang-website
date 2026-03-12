@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import { translations, languages } from './i18n'
+import { ExternalLink, Globe, ChevronDown, Menu, X, ClipboardCheck, Settings, BadgeCheck, Code, Bug, MessageCircle, Copy, Check, Video, UserSearch, Radar, TrendingUp, Activity, Filter, Network, RefreshCw, Shield, Library, Monitor } from 'lucide-react'
 
 const queryClient = new QueryClient()
 
@@ -32,7 +33,35 @@ const comparisonData = [
 ]
 
 function MaterialIcon({ name, className = '' }) {
-  return <span className={`material-symbols-outlined ${className}`}>{name}</span>
+  const icons = {
+    open_in_new: ExternalLink,
+    language: Globe,
+    expand_more: ChevronDown,
+    menu: Menu,
+    close: X,
+    checklist: ClipboardCheck,
+    settings_suggest: Settings,
+    verified: BadgeCheck,
+    code: Code,
+    bug_report: Bug,
+    forum: MessageCircle,
+    content_copy: Copy,
+    check: Check,
+    movie_edit: Video,
+    person_search: UserSearch,
+    radar: Radar,
+    trending_up: TrendingUp,
+    monitor: Monitor,
+    filter_alt: Filter,
+    hub: Network,
+    sync_alt: RefreshCw,
+    security: Shield,
+    video_library: Library,
+    monitoring: Activity,
+  }
+  const Icon = icons[name]
+  if (!Icon) return <span className={className}>{name}</span>
+  return <Icon className={className} />
 }
 
 function Skeleton({ className = '' }) {
