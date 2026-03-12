@@ -34,7 +34,8 @@ export const translations = {
     ]},
     footer: { description: 'Librefang is a production-grade Agent Operating System built in Rust. Open source, privacy-focused, and built for 24/7 autonomous operation.', privacy: 'Privacy', license: 'License', project: 'Project', community: 'Community', issues: 'Issues', discussions: 'Discussions', docs: 'Docs', quickStart: 'Quick Start', agentOS: 'Agent Operating System', agentOSDesc: 'Production-grade, Rust-powered.' },
     githubStats: { title: 'Join Our Community', subtitle: 'Help us build the future of autonomous AI agents', stars: 'Stars', forks: 'Forks', issues: 'Issues', lastUpdate: 'Last Update', starUs: 'Star Us', discuss: 'Discuss' },
-    contributing: { title: 'Contributing', subtitle: 'Help build the future of autonomous AI', code: 'Code', codeDesc: 'Contribute features, fix bugs, or improve documentation', submitPR: 'Submit PR', report: 'Report Bugs', reportDesc: 'Found an issue? Help us improve by reporting it', openIssue: 'Open Issue', community: 'Community', communityDesc: 'Join discussions and help other users', joinDiscuss: 'Join Discussion' }
+    contributing: { title: 'Contributing', subtitle: 'Help build the future of autonomous AI', code: 'Code', codeDesc: 'Contribute features, fix bugs, or improve documentation', submitPR: 'Submit PR', report: 'Report Bugs', reportDesc: 'Found an issue? Help us improve by reporting it', openIssue: 'Open Issue', community: 'Community', communityDesc: 'Join discussions and help other users', joinDiscuss: 'Join Discussion' },
+    meta: { title: 'Librefang - Production-Grade Agent Operating System | Rust-Powered, 24/7 Autonomous AI', description: 'Librefang is the production-grade Agent Operating System built in Rust. 180ms cold start, 40MB memory, 16 security layers, 40 channel adapters. Run autonomous AI agents 24/7 — not a chatbot framework, a complete OS for AI.' }
   },
   zh: {
     nav: { features: '特性', comparison: '对比', docs: '文档', github: 'GitHub' },
@@ -71,7 +72,8 @@ export const translations = {
     ]},
     footer: { description: 'Librefang 是用 Rust 构建的生产级代理操作系统。开源、注重隐私，专为 24/7 自主运行而设计。', privacy: '隐私', license: '许可证', project: '项目', community: '社区', issues: '问题', discussions: '讨论', docs: '文档', quickStart: '快速开始', agentOS: '代理操作系统', agentOSDesc: '生产级，Rust 驱动。' },
     githubStats: { title: '加入我们的社区', subtitle: '帮助我们构建自主 AI 的未来', stars: '星标', forks: '分支', issues: '问题', lastUpdate: '最后更新', starUs: '给我们星标', discuss: '讨论' },
-    contributing: { title: '贡献代码', subtitle: '帮助构建自主 AI 的未来', code: '代码', codeDesc: '贡献功能、修复 bug 或完善文档', submitPR: '提交 PR', report: '报告问题', reportDesc: '发现问题？帮助我们改进', openIssue: '提 issue', community: '社区', communityDesc: '加入讨论并帮助其他用户', joinDiscuss: '加入讨论' }
+    contributing: { title: '贡献代码', subtitle: '帮助构建自主 AI 的未来', code: '代码', codeDesc: '贡献功能、修复 bug 或完善文档', submitPR: '提交 PR', report: '报告问题', reportDesc: '发现问题？帮助我们改进', openIssue: '提 issue', community: '社区', communityDesc: '加入讨论并帮助其他用户', joinDiscuss: '加入讨论' },
+    meta: { title: 'Librefang - 代理操作系统 | Rust 驱动，24/7 自主 AI 代理', description: 'Librefang 是用 Rust 构建的生产级代理操作系统。180ms 冷启动，40MB 内存，16 层安全，40 个渠道适配器。运行自主 AI 代理 24/7 — 不是聊天机器人框架，而是完整的 AI 操作系统。' }
   },
   de: {
     nav: { features: 'Funktionen', comparison: 'Vergleich', docs: 'Dokumentation', github: 'GitHub' },
@@ -108,7 +110,8 @@ export const translations = {
     ]},
     footer: { description: 'Librefang ist ein produktionsreifes Agenten-Betriebssystem in Rust. Open Source, datenschutzorientiert und für 24/7 autonomen Betrieb konzipiert.', privacy: 'Datenschutz', license: 'Lizenz', project: 'Projekt', community: 'Community', issues: 'Probleme', discussions: 'Diskussionen', docs: 'Dokumentation', quickStart: 'Schnellstart', agentOS: 'Agenten-Betriebssystem', agentOSDesc: 'Produktionsreif, Rust-basiert.' },
     githubStats: { title: 'Trete unserer Community bei', subtitle: 'Hilf uns, die Zukunft autonomer KI-Agenten zu bauen', stars: 'Sterne', forks: 'Forks', issues: 'Issues', lastUpdate: 'Letzte Aktualisierung', starUs: 'Stern geben', discuss: 'Diskutieren' },
-    contributing: { title: 'Mitmachen', subtitle: 'Hilf die Zukunft autonomer KI zu bauen', code: 'Code', codeDesc: 'Features beisteuern, Bugs beheben oder Dokumentation verbessern', submitPR: 'PR einreichen', report: 'Bugs melden', reportDesc: 'Ein Problem gefunden? Hilf uns es zu verbessern', openIssue: 'Issue öffnen', community: 'Community', communityDesc: 'Diskutiere und hilf anderen Nutzern', joinDiscuss: 'Diskussion beitreten' }
+    contributing: { title: 'Mitmachen', subtitle: 'Hilf die Zukunft autonomer KI zu bauen', code: 'Code', codeDesc: 'Features beisteuern, Bugs beheben oder Dokumentation verbessern', submitPR: 'PR einreichen', report: 'Bugs melden', reportDesc: 'Ein Problem gefunden? Hilf uns es zu verbessern', openIssue: 'Issue öffnen', community: 'Community', communityDesc: 'Diskutiere und hilf anderen Nutzern', joinDiscuss: 'Diskussion beitreten' },
+    meta: { title: 'Librefang - Agenten-Betriebssystem | Rust-basiert, 24/7 Autonome KI-Agenten', description: 'Librefang ist ein produktionsreifes Agenten-Betriebssystem in Rust. 180ms Cold Start, 40MB Speicher, 16 Sicherheitsschichten, 40 Kanaladapter. Führen Sie autonome KI-Agenten 24/7 aus — kein Chatbot-Framework, ein komplettes Betriebssystem für KI.' }
   },
   ja: {
     nav: { features: '機能', comparison: '比較', docs: 'ドキュメント', github: 'GitHub' },
@@ -145,7 +148,8 @@ export const translations = {
     ]},
     footer: { description: 'LibrefangはRustで構築された本番対応エージェントオペレーティングシステムです。オープンソース、プライバシー重視、24時間365日自律運用向けに設計されています。', privacy: 'プライバシー', license: 'ライセンス', project: 'プロジェクト', community: 'コミュニティ', issues: '問題', discussions: 'ディスカッション', docs: 'ドキュメント', quickStart: 'クイックスタート', agentOS: 'エージェントオペレーティングシステム', agentOSDesc: '本番対応、Rust駆動。' },
     githubStats: { title: 'コミュニティに参加', subtitle: '自律型AIエージェントの未来を築くご協力をお願いします', stars: 'スター', forks: 'フォーク', issues: 'イシュー', lastUpdate: '最終更新', starUs: 'スターを付ける', discuss: '議論' },
-    contributing: { title: 'コントリビューション', subtitle: '自律型AIの未来を築く', code: 'コード', codeDesc: '機能追加、バグ修正、ドキュメント改善', submitPR: 'PR提交', report: 'バグ報告', reportDesc: '問題を発見しましたか？報告して改善に協力', openIssue: 'Issueを開く', community: 'コミュニティ', communityDesc: '議論に参加して他のユーザーを助ける', joinDiscuss: '議論に参加' }
+    contributing: { title: 'コントリビューション', subtitle: '自律型AIの未来を築く', code: 'コード', codeDesc: '機能追加、バグ修正、ドキュメント改善', submitPR: 'PR提交', report: 'バグ報告', reportDesc: '問題を発見しましたか？報告して改善に協力', openIssue: 'Issueを開く', community: 'コミュニティ', communityDesc: '議論に参加して他のユーザーを助ける', joinDiscuss: '議論に参加' },
+    meta: { title: 'Librefang - エージェントオペレーティングシステム | Rust駆動、24/7自律型AIエージェント', description: 'LibrefangはRustで構築された本番対応エージェントオペレーティングシステムです。180msコールドスタート、40MBメモリ、16層のセキュリティ、40のチャンネルアダプター。自律型AIエージェントを24/7で実行 — チャットボットフレームワークではなく、AIのための完全なOS。' }
   },
   ko: {
     nav: { features: '기능', comparison: '비교', docs: '문서', github: 'GitHub' },
@@ -182,7 +186,8 @@ export const translations = {
     ]},
     footer: { description: 'Librefang은 Rust로 구축된 프로덕션 등급 에이전트 운영체제입니다. 오픈소스, 프라이버시 중시, 24/7 자율 운영을 위해 설계되었습니다.', privacy: '프라이버시', license: '라이선스', project: '프로젝트', community: '커뮤니티', issues: '이슈', discussions: '토론', docs: '문서', quickStart: '빠른 시작', agentOS: '에이전트 운영체제', agentOSDesc: '프로덕션 등급, Rust 기반.' },
     githubStats: { title: '커뮤니티에 참여하세요', subtitle: '자율 AI 에이전트의 미래를 구축하는 것을 도와주세요', stars: '스타', forks: '포크', issues: '이슈', lastUpdate: '마지막 업데이트', starUs: '스타 주기', discuss: '논의하기' },
-    contributing: { title: '기여하기', subtitle: '자율 AI의 미래를 구축하는 것을 도와주세요', code: '코드', codeDesc: '기능 추가, 버그 수정, 문서 개선에 기여하세요', submitPR: 'PR 제출', report: '버그 신고', reportDesc: '문제를 발견했나요? 신고하여 개선에 참여하세요', openIssue: '이슈 열기', community: '커뮤니티', communityDesc: '토론에 참여하고 다른 사용자를 도와주세요', joinDiscuss: '토론 참여' }
+    contributing: { title: '기여하기', subtitle: '자율 AI의 미래를 구축하는 것을 도와주세요', code: '코드', codeDesc: '기능 추가, 버그 수정, 문서 개선에 기여하세요', submitPR: 'PR 제출', report: '버그 신고', reportDesc: '문제를 발견했나요? 신고하여 개선에 참여하세요', openIssue: '이슈 열기', community: '커뮤니티', communityDesc: '토론에 참여하고 다른 사용자를 도와주세요', joinDiscuss: '토론 참여' },
+    meta: { title: 'Librefang - 에이전트 운영체제 | Rust 기반, 24/7 자율 AI 에이전트', description: 'Librefang은 Rust로 구축된 프로덕션 등급 에이전트 운영체제입니다. 180ms 콜드스타트, 40MB 메모리, 16개 보안 레이어, 40개 채널 어댑터. 자율 AI 에이전트를 24/7로 실행 — 채팅봇 프레임워크가 아닌, AI를 위한 완전한 OS.' }
   },
   'zh-TW': {
   },
@@ -221,7 +226,8 @@ export const translations = {
     ]},
     footer: { description: 'Librefang 是用 Rust 構建的生產級代理操作系統。開源、注重隱私，專為 24/7 自主運行而設計。', privacy: '隱私', license: '許可證', project: '專案', community: '社區', issues: '問題', discussions: '討論', docs: '文檔', quickStart: '快速開始', agentOS: '代理操作系統', agentOSDesc: '生產級，Rust 驅動。' },
     githubStats: { title: '加入我們的社群', subtitle: '幫助我們構建自主 AI 的未來', stars: '星標', forks: '分支', issues: '問題', lastUpdate: '最後更新', starUs: '給我們星標', discuss: '討論' },
-    contributing: { title: '貢獻', subtitle: '幫助構建自主 AI 的未來', code: '程式碼', codeDesc: '貢獻功能、修復問題或改善文檔', submitPR: '提交 PR', report: '回報問題', reportDesc: '發現問題？幫助我們改進', openIssue: '開啟問題', community: '社群', communityDesc: '加入討論並幫助其他使用者', joinDiscuss: '參與討論' }
+    contributing: { title: '貢獻', subtitle: '幫助構建自主 AI 的未來', code: '程式碼', codeDesc: '貢獻功能、修復問題或改善文檔', submitPR: '提交 PR', report: '回報問題', reportDesc: '發現問題？幫助我們改進', openIssue: '開啟問題', community: '社群', communityDesc: '加入討論並幫助其他使用者', joinDiscuss: '參與討論' },
+    meta: { title: 'Librefang - 代理操作系統 | Rust 驅動，24/7 自主 AI 代理', description: 'Librefang 是用 Rust 構建的生產級代理操作系統。180ms 冷啟動，40MB 記憶體，16 層安全，40 個頻道適配器。運行自主 AI 代理 24/7 — 不是聊天機器人框架，而是完整的 AI 操作系統。' }
   },
   es: {
     nav: { features: 'Características', comparison: 'Comparación', docs: 'Docs', github: 'GitHub' },
@@ -258,7 +264,8 @@ export const translations = {
     ]},
     footer: { description: 'Librefang es un Sistema Operativo de Agentes de grado de producción construido en Rust. Código abierto, enfocado en privacidad y diseñado para operación autónoma 24/7.', privacy: 'Privacidad', license: 'Licencia', project: 'Proyecto', community: 'Comunidad', issues: 'Issues', discussions: 'Discusiones', docs: 'Docs', quickStart: 'Inicio Rápido', agentOS: 'Sistema Operativo de Agentes', agentOSDesc: 'Grado de producción, impulsado por Rust.' },
     githubStats: { title: 'Únete a Nuestra Comunidad', subtitle: 'Ayúdanos a construir el futuro de los agentes de IA autónomos', stars: 'Estrellas', forks: 'Forks', issues: 'Issues', lastUpdate: 'Última Actualización', starUs: 'Dános Estrella', discuss: 'Discutir' },
-    contributing: { title: 'Contribuir', subtitle: 'Ayuda a construir el futuro de la IA autónoma', code: 'Código', codeDesc: 'Contribuye con funciones, corrige errores o mejora la documentación', submitPR: 'Enviar PR', report: 'Reportar Errores', reportDesc: '¿Encontraste un problema? Ayúdanos a mejorarlo', openIssue: 'Abrir Issue', community: 'Comunidad', communityDesc: 'Únete a las discusiones y ayuda a otros usuarios', joinDiscuss: 'Unirse a la Discusión' }
+    contributing: { title: 'Contribuir', subtitle: 'Ayuda a construir el futuro de la IA autónoma', code: 'Código', codeDesc: 'Contribuye con funciones, corrige errores o mejora la documentación', submitPR: 'Enviar PR', report: 'Reportar Errores', reportDesc: '¿Encontraste un problema? Ayúdanos a mejorarlo', openIssue: 'Abrir Issue', community: 'Comunidad', communityDesc: 'Únete a las discusiones y ayuda a otros usuarios', joinDiscuss: 'Unirse a la Discusión' },
+    meta: { title: 'Librefang - Sistema Operativo de Agentes | Impulsado por Rust, Agentes de IA Autónomos 24/7', description: 'Librefang es un Sistema Operativo de Agentes de grado de producción construido en Rust. 180ms inicio en frío, 40MB memoria, 16 capas de seguridad, 40 adaptadores de canales. Ejecuta agentes de IA autónomos 24/7 — no es un framework de chatbot, un SO completo para IA.' }
   }
 }
 

@@ -633,6 +633,16 @@ function App() {
     document.documentElement.lang = detectedLang
   }, [])
 
+  useEffect(() => {
+    if (currentT?.meta) {
+      document.title = currentT.meta.title
+      const descMeta = document.querySelector('meta[name="description"]')
+      if (descMeta) descMeta.setAttribute('content', currentT.meta.description)
+      const ogDesc = document.querySelector('meta[property="og:description"]')
+      if (ogDesc) ogDesc.setAttribute('content', currentT.meta.description)
+    }
+  }, [lang, currentT])
+
   const currentT = translations[lang]
 
   return (
