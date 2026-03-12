@@ -58,8 +58,8 @@ export default {
     // GET /api/github - GitHub stats proxy
     if (path === '/api/github' && method === 'GET') {
       try {
-        const cacheKey = 'github_stats_cache_v6'
-        const cacheTimeKey = 'github_stats_time_v6'
+        const cacheKey = 'github_stats_cache_v7'
+        const cacheTimeKey = 'github_stats_time_v7'
         const cacheDuration = 1000 * 60 * 30 // 30 minutes
 
         let cachedData = null
@@ -122,6 +122,7 @@ export default {
           forks: repoJson.forks_count || 0,
           issues: repoJson.open_issues_count || 0,
           lastUpdate: repoJson.updated_at || '',
+          createdAt: repoJson.created_at || '',
           downloads: totalDownloads,
         }
 

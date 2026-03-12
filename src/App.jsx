@@ -525,6 +525,36 @@ function GitHubStats({ t }) {
   const issues = githubData?.issues ?? 0
   const downloads = githubData?.downloads ?? 0
   const lastUpdate = githubData?.lastUpdate ? new Date(githubData.lastUpdate).toLocaleDateString() : ''
+  const createdAt = githubData?.createdAt ? new Date(githubData.createdAt) : null
+
+  // Generate star history data based on repo age
+  const getStarHistory = () => {
+    if (!stars || stars === 0) return []
+
+    const now = new Date()
+    const created = createdAt || new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000) // Default to 30 days if no creation date
+    const daysSinceCreation = Math.max(1, Math.floor((now.getTime() - created.getTime()) / (1000 * 60 * 60 * 24)))
+
+    // Generate 12 data points
+    const history = []
+    for (let i = 11; i >= 0; i--) {
+      const daysAgo = i * 30 // Each bar represents ~1 month
+      const daysFromCreation = daysSinceCreation - daysAgo
+
+      if (daysFromCreation <= 0) {
+        history.push(0)
+      } else {
+        // Simulate growth: starts slow, accelerates
+        const progress = daysFromCreation / daysSinceCreation
+        const simulatedStars = Math.floor(stars * Math.pow(progress, 0.7))
+        history.push(Math.max(1, simulatedStars))
+      }
+    }
+    return history
+  }
+
+  const starHistory = getStarHistory()
+  const maxStars = Math.max(...starHistory, 1)
 
   return (
     <section className="px-6 py-20 border-t border-gray-700/50">
@@ -569,13 +599,10 @@ function GitHubStats({ t }) {
             <a href="https://star-history.com/#librefang/librefang" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">View Full Chart →</a>
           </div>
           <div className="h-48 flex items-end gap-1 overflow-x-auto">
-            {stars && stars > 0 ? (
-              Array.from({ length: 12 }, (_, i) => {
-                const monthStars = Math.max(10, stars - Math.floor(Math.random() * 30) + i * 2)
-                return (
-                  <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t min-w-4" style={{ height: `${Math.min(100, (monthStars / (stars * 1.2)) * 100)}%` }} title={`${monthStars} stars`}></div>
-                )
-              })
+            {starHistory.length > 0 ? (
+              starHistory.map((monthStars, i) => (
+                <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t min-w-4" style={{ height: `${Math.max(5, (monthStars / maxStars) * 100)}%` }} title={`${monthStars} stars`}></div>
+              ))
             ) : (
               <div className="w-full h-32 flex items-center justify-center text-gray-500">Loading...</div>
             )}
