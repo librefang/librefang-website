@@ -497,9 +497,10 @@ function GitHubStats({ t }) {
         if (!res.ok) throw new Error('Failed to fetch')
         return res.json()
       } catch {
-        return { stars: 0, forks: 0, issues: 0, lastUpdate: '', downloads: 0 }
+        return { stars: 0, forks: 0, issues: 0, prs: 0, lastUpdate: '', downloads: 0, starHistory: [] }
       }
     },
+    initialData: { stars: 0, forks: 0, issues: 0, prs: 0, downloads: 0, lastUpdate: '', starHistory: [] },
     staleTime: 1000 * 60 * 30,
     retry: 1,
   })
