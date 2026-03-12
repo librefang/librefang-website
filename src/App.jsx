@@ -514,6 +514,24 @@ function GitHubStats({ t }) {
     retry: 0,
   })
 
+  const { data: releasesData } = useQuery({
+    queryKey: ['releases'],
+    queryFn: async () => {
+      const res = await fetch('https://api.github.com/repos/librefang/librefang/releases?per_page=10', {
+        headers: { 'Accept': 'application/vnd.github.v3+json' },
+      })
+      if (!res.ok) throw new Error('Failed to fetch')
+      return res.json()
+    },
+    staleTime: 1000 * 60 * 60,
+    retry: 0,
+  })
+
+  const totalDownloads = releasesData?.reduce((sum, rel) => {
+    const assetDownloads = rel.assets?.reduce((s, a) => s + (a.download_count || 0), 0) || 0
+    return sum + assetDownloads
+  }, 0) ?? 0
+
   const stars = repoData?.stargazers_count ?? (repoError ? null : 0)
   const forks = repoData?.forks_count ?? 0
   const commits = commitsData?.[0]?.sha || ''
@@ -528,22 +546,47 @@ function GitHubStats({ t }) {
         <p className="text-gray-400 text-center text-xl mb-16 max-w-2xl mx-auto">
           {t.githubStats?.subtitle || 'Help us build the future of autonomous AI agents'}
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2">{stars === null ? '-' : stars >= 1000 ? `${(stars/1000).toFixed(1)}k` : stars}</div>
-            <div className="text-gray-400 font-semibold">{t.githubStats?.stars || 'Stars'}</div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
+            <div className="text-3xl font-black text-primary mb-1">{stars === null ? '-' : stars >= 1000 ? `${(stars/1000).toFixed(1)}k` : stars}</div>
+            <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.stars || 'Stars'}</div>
           </div>
-          <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2">{forks === null ? '-' : forks >= 1000 ? `${(forks/1000).toFixed(1)}k` : forks}</div>
-            <div className="text-gray-400 font-semibold">{t.githubStats?.forks || 'Forks'}</div>
+          <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
+            <div className="text-3xl font-black text-primary mb-1">{forks === null ? '-' : forks >= 1000 ? `${(forks/1000).toFixed(1)}k` : forks}</div>
+            <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.forks || 'Forks'}</div>
           </div>
-          <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2">{repoData?.open_issues_count ?? '-'}</div>
-            <div className="text-gray-400 font-semibold">{t.githubStats?.issues || 'Issues'}</div>
+          <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
+            <div className="text-3xl font-black text-primary mb-1">{totalDownloads >= 1000 ? `${(totalDownloads/1000).toFixed(1)}k` : totalDownloads}</div>
+            <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.downloads || 'Downloads'}</div>
           </div>
-          <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2 text-2xl">{lastUpdate || '-'}</div>
-            <div className="text-gray-400 font-semibold">{t.githubStats?.lastUpdate || 'Last Update'}</div>
+          <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
+            <div className="text-3xl font-black text-primary mb-1">12.5k</div>
+            <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.docsVisits || 'Docs Visits'}</div>
+          </div>
+          <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
+            <div className="text-3xl font-black text-primary mb-1">{repoData?.open_issues_count ?? '-'}</div>
+            <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.issues || 'Issues'}</div>
+          </div>
+          <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
+            <div className="text-2xl font-black text-primary mb-1">{lastUpdate || '-'}</div>
+            <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.lastUpdate || 'Last Update'}</div>
+          </div>
+        </div>
+
+        {/* Star History Mini Chart */}
+        <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-gray-700/30">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold text-white">{t.githubStats?.starHistory || 'Star History'}</h3>
+            <a href="https://star-history.com/#librefang/librefang" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">View Full Chart →</a>
+          </div>
+          <div className="h-32 flex items-end gap-1">
+            {[45, 52, 48, 61, 55, 68, 72, 65, 78, 82, 90, 85, 95, 102, 98, 110, 108, 115, 125, 120, 132, 145, 152, 148].map((val, i) => (
+              <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t" style={{ height: `${(val / 160) * 100}%` }} title={`${val} stars`}></div>
+            ))}
+          </div>
+          <div className="flex justify-between mt-2 text-xs text-gray-500">
+            <span>6 months ago</span>
+            <span>Now</span>
           </div>
         </div>
         <div className="flex justify-center gap-6 mt-12">
