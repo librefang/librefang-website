@@ -536,7 +536,7 @@ function GitHubStats({ t }) {
     queryKey: ['docsVisits'],
     queryFn: async () => {
       try {
-        const res = await fetch('https://librefang-counter.YOUR_NAME.workers.dev/api')
+        const res = await fetch('https://librefang-counter.suzukaze-haduki.workers.dev/api')
         if (!res.ok) return { total: 0 }
         return res.json()
       } catch {
