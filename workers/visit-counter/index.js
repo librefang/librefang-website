@@ -27,36 +27,31 @@ export default {
 
         const today = new Date().toISOString().split('T')[0]
 
-        // Get current values
         let total = 0
         let todayCount = 0
         try {
-          total = await env.VISIT_COUNTER.get('total') || '0'
-          total = parseInt(total, 10)
+          total = parseInt(await env.VISIT_COUNTER.get('total') || '0', 10)
         } catch (e) { total = 0 }
 
         try {
-          todayCount = await env.VISIT_COUNTER.get('today_' + today) || '0'
-          todayCount = parseInt(todayCount, 10)
+          todayCount = parseInt(await env.VISIT_COUNTER.get('today_' + today) || '0', 10)
         } catch (e) { todayCount = 0 }
 
-        // Increment
         total = (total || 0) + 1
         todayCount = (todayCount || 0) + 1
 
-        // Save
         try {
           await env.VISIT_COUNTER.put('total', String(total))
           await env.VISIT_COUNTER.put('today_' + today, String(todayCount))
         } catch (e) {
-          return new Response(JSON.stringify({ error: 'KV put failed: ' + e.message }), { status: 500, headers: { 'Content-Type': 'application/json' } })
+          return new Response(JSON.stringify({ error: 'KV put failed: ' + e.message }), { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } })
         }
 
         return new Response(JSON.stringify({ success: true, total }), {
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json', ...corsHeaders }
         })
       } catch (e) {
-        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: { 'Content-Type': 'application/json' } })
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } })
       }
     }
 
@@ -67,17 +62,15 @@ export default {
       let todayCount = 0
 
       try {
-        total = await env.VISIT_COUNTER.get('total') || '0'
-        total = parseInt(total, 10)
+        total = parseInt(await env.VISIT_COUNTER.get('total') || '0', 10)
       } catch (e) { total = 0 }
 
       try {
-        todayCount = await env.VISIT_COUNTER.get('today_' + today) || '0'
-        todayCount = parseInt(todayCount, 10)
+        todayCount = parseInt(await env.VISIT_COUNTER.get('today_' + today) || '0', 10)
       } catch (e) { todayCount = 0 }
 
       return new Response(JSON.stringify({ total: total || 0, today: todayCount || 0, date: today }), {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', ...corsHeaders }
       })
     }
 
@@ -93,7 +86,7 @@ export default {
   }).catch(function() {});
 })();`
       return new Response(script, {
-        headers: { 'Content-Type': 'application/javascript' }
+        headers: { 'Content-Type': 'application/javascript', ...corsHeaders }
       })
     }
 
