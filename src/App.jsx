@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 
@@ -174,6 +174,18 @@ function Header({ t }) {
 }
 
 function Hero() {
+  const { data: release, isLoading } = useQuery({
+    queryKey: ['latestRelease'],
+    queryFn: async () => {
+      const res = await fetch('https://api.github.com/repos/librefang/librefang/releases/latest')
+      if (!res.ok) throw new Error('Failed to fetch')
+      return res.json()
+    },
+    staleTime: 1000 * 60 * 30,
+  })
+
+  const version = release?.tag_name || 'v0.3.47'
+
   return (
     <header className="relative px-6 pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden">
       <div className="absolute inset-0 opacity-30 pointer-events-none">
@@ -187,7 +199,7 @@ function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            v0.1.0 · Rust-Powered · Open Source
+            {isLoading ? 'Loading...' : version} · Rust-Powered · Open Source
           </div>
           <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-primary">
             Librefang
