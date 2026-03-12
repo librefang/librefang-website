@@ -138,6 +138,111 @@ export const translations = {
       { question: 'GitHubリポジトリはどこですか？', answer: 'GitHubでLibrefangを見つける：github.com/librefang/librefang。リリースと機能更新をフォローするためにプロジェクトにスターを付けてください。' },
     ]},
     footer: { description: 'LibrefangはRustで構築された本番対応エージェントオペレーティングシステムです。オープンソース、プライバシー重視、24時間365日自律運用向けに設計されています。', privacy: 'プライバシー', license: 'ライセンス', project: 'プロジェクト', community: 'コミュニティ', issues: '問題', discussions: 'ディスカッション', docs: 'ドキュメント', quickStart: 'クイックスタート', agentOS: 'エージェントオペレーティングシステム', agentOSDesc: '本番対応、Rust駆動。' }
+  },
+  ko: {
+    nav: { features: '기능', comparison: '비교', docs: '문서', github: 'GitHub' },
+    hero: { badge: '오픈소스', title: '에이전트 운영체제', subtitle: 'Rust로 구축된 프로덕션 등급 자율 AI. 180ms 콜드스타트, 40MB 메모리, 16개 보안 레이어, 40개 채널 어댑터.', getStarted: '시작하기', githubRepo: 'GitHub 저장소', systemPreview: '시스템 미리보기' },
+    stats: { coldStart: '콜드스타트', memory: '메모리', security: '보안 레이어', channels: '채널' },
+    features: { title: '기본 제공 Hands', subtitle: '바로 사용할 수 있는 7가지 자율 기능 유닛', feature1Title: '7개의 Hands. 무한 자동화.', feature1Desc: '각 Hand는 자체 모델, 도구, 워크플로우를 갖춘 독립형 자동화 유닛입니다. 자정에 출근하고 급여를 요구하지 않는 AI 직원이라고 생각하세요.' },
+    featureCards: [
+      { title: 'Clip', description: 'YouTube 영상을 AI 자막과 음성으로 자동으로 세로 숏클립으로 변환. Telegram에 직접 게시. 콘텐츠 파이프라인이 자동으로 실행됩니다 — 편집자 필요 없음.' },
+      { title: 'Lead', description: 'ICP 기반 점수화, 중복 제거, CSV 내보내기를 통한 일일 자율 잠재고객 발견. 매 아침 새로운 적격 잠재고객 목록으로 깨어나세요.' },
+      { title: 'Collector', description: '변경 감지 기능이 있는 OSINT 등급 인텔리전스 모니터링. 경쟁사, 뉴스, 신호를 추적 — 의미 있는 변화가 있을 때만 알림.' },
+      { title: 'Predictor', description: '보정된 확률적 추론을 갖춘 초예측 엔진. 경쟁사보다 먼저 시장 동향과 사업 결과를 예측합니다.' },
+      { title: 'Researcher', description: '신뢰성 평가가 있는 심층 자율 연구. 소스 품질 점수가 포함된 구조화된 보고서 생성 — 단순 웹 검색 요약이 아닙니다.' },
+      { title: 'Twitter + Browser', description: '인간 승인 게이트가 있는 자율 X/Twitter 관리. 구매 가드레일이 있는 전체 브라우저 자동화 — 통제 손실 없이 파워를 얻으세요.' }
+    ],
+    workflows: { title: '무엇을 만들 수 있나요?', subtitle: '자율 운영을 위한 프로덕션 준비 워크플로우', workflow1Title: '단일 Hand로 전체 워크플로우 대체', workflow1Desc: 'Librefang은 단순 도우미가 아닙니다 — 인계합니다. 이것들은 당신이 사람을 고용했을 작업들입니다.' },
+    workflowCards: [
+      { title: '콘텐츠 파이프라인', description: 'Clip + Twitter协同작동: 트렌드 영상 모니터링, 숏클립 편집, 자막 추가, 소셜 게시 — 오프라인일 때도すべて자동화.' },
+      { title: '영업 잠재고객', description: 'Lead每밤실행: 잠재고객 발견, ICP 적합도 점수화, 중복 제거, 정리된 CSV 내보내기. 일어나자마자 판매 준비 완료.' },
+      { title: '경쟁사 인텔리전스', description: 'Collector가 경쟁사 사이트, 가격, 채용 공고, 뉴스 모니터링. 변화가 있으면 즉시 알림 — 당신이 발견한 후가 아닙니다.' },
+      { title: '멀티 에이전트 오케스트레이션', description: '워크플로우 오케스트레이션으로 Hands 체이닝. Researcher → Predictor → Clip → 40개 채널 브로드캐스트 같은 파이프라인 구축.' },
+      { title: 'OpenClaw에서 마이그레이션', description: '원 명령 마이그레이션: librefang migrate --from openclaw. 에이전트, 메모리, 스킬이 수동 재설정 없이 전송됩니다.' },
+      { title: '프로덕션 보안', description: 'WASM 샌드박스, Merkle 감사 체인, SSRF 보호, 프롬프트 주입 스캐닝, GCRA 속도 제한 — 16개 레이어로 안심하고 배포하세요.' }
+    ],
+    comparison: { title: '비교', subtitle: 'Librefang 대 기타 에이전트 프레임워크', openclaw: 'OpenClaw', zeroclaw: 'ZeroClaw', librefang: 'Librefang', metric: '지표', librefangVs: 'Librefang vs OpenClaw vs ZeroClaw', subtitle2: 'Rust로 구축. 프로덕션을 위해 설계, 프로토타입이 아닙니다.' },
+    install: { title: '시작하기', subtitle: 'Librefang을 설치하고 수分钟内에 자율 에이전트 구축', requirements: '요구사항', whatYouGet: '얻는 것', threeSteps: '자율 AI까지 3단계', install: '설치', initialize: '초기화', initializeDesc: '대화형 설정을 따라 LLM API 키 및 메시징 채널 연결', startAgents: '에이전트 시작', startAgentsDesc: '에이전트는 백그라운드 데몬으로 실행. 데스크톱 앱 또는 Web UI로 모니터링 및 관리.', copy: '복사', copied: '복사됨!', curl: 'curl -fsSL', or: '또는', npm: 'npm', pnpm: 'pnpm', cargo: 'cargo', brew: 'brew', installText: 'install', more: '추가 설치 옵션', singleBinary: '원 명령, 그리고 떠나세요', singleBinaryDesc: '단일 바이너리. Docker 불필요. 노트북, VPS 또는 라즈베리 파이에서 실행 가능. 60초 이내에 자율 에이전트 시작.', platforms: 'Linux / macOS / Windows', desktopApp: 'Tauri 2.0 네이티브 데스크톱 앱' },
+    faq: { title: '자주 묻는 질문', items: [
+      { question: 'Librefang이란?', answer: 'Librefang은 Rust로 구축된 프로덕션 등급 에이전트 운영체제입니다. 채팅봇 프레임워크와 달리, 사용자 프롬프트 없이 일정에 따라 24/7 자율 에이전트를 실행하도록 설계되었습니다. AI 에이전트 아래의 OS 레이어라고 생각하세요 — 런타임, 보안, 채널 인프라를 제공합니다.' },
+      { question: 'OpenClaw와 다른 점은?', answer: 'OpenClaw은 개인 사용 및 실험에 좋습니다. Librefang은 프로덕션 등급 신뢰성이 필요할 때 선택하세요 — TypeScript 대신 Rust, 기본 샌드박스 대신 16개 보안 레이어, 플러그인 글루 코드 대신 기본 제공 Hands. Librefang에는 기본 제공 마이그레이션 경로도 있습니다: librefang migrate --from openclaw.' },
+      { question: 'Hands란?', answer: 'Hands는 Librefang의 자율 기능 유닛입니다 — 개선된 플러그인이라고 생각하지만 독립적입니다. 각 Hand는 지정된 모델, 도구, 워크플로우와 함께 제공됩니다. 아무것도 연결할 필요가 없습니다; Hand를 활성화하기만 하면 됩니다. 7개의 기본 Hands는 비디오(Clip), 잠재고객(Lead), 인텔리전스(Collector), 예측(Predictor), 연구(Researcher), 소셜 미디어(Twitter), 웹 자동화(Browser)를 포함합니다.' },
+      { question: '어떤 LLM 공급자가 지원되나요?', answer: 'Librefang은 12개의 주요 LLM 공급자를 지원합니다 — Anthropic, OpenAI, Gemini, Groq, DeepSeek, Mistral, Together, Ollama, vLLM 등을 포함하여 총 123개 이상의 모델. 모든 공급자는 API 키가 필요합니다; OAuth는 현재 지원되지 않습니다. 각 Hand는 다른 공급자를 사용하도록 구성할 수 있습니다.' },
+      { question: '어떤 채널이 지원되나요?', answer: 'Librefang은 40개의 채널 어댑터를 지원합니다 — 모든 에이전트 프레임워크中最광범위한 커버리지. 여기에는 Telegram, Discord, Slack, WhatsApp, Signal, Matrix, Teams, Google Chat, Feishu, DingTalk, Mastodon, Bluesky, LinkedIn, Reddit, IRC 등 24개 이상이 포함됩니다. 팀에서 사용하면 Librefang이 아마 연결할 수 있을 것입니다.' },
+      { question: '프로덕션 준비가 되나요?', answer: 'Librefang v0.1.0은 1,767개 이상의 테스트를 통과하고 Clippy 경고为零입니다. WASM 샌드박스, Merkle 해시 체인 감사 추적, SSRF 보호를 포함한 16개의 개별 보안 레이어가 있습니다. v1.0까지 주요 API 변경이 있을 수 있으므로 프로덕션에서 버전을 고정하세요. 코어 런타임은 안정적이며 현재 프로덕션 배포에서 사용되고 있습니다.' },
+      { question: 'GitHub 저장소는 어디인가요?', answer: 'GitHub에서 Librefang 찾기: github.com/librefang/librefang. 릴리스 및 기능 업데이트를 팔로우하려면 프로젝트에 스타를 눌러주세요.' },
+    ]},
+    footer: { description: 'Librefang은 Rust로 구축된 프로덕션 등급 에이전트 운영체제입니다. 오픈소스, 프라이버시 중시, 24/7 자율 운영을 위해 설계되었습니다.', privacy: '프라이버시', license: '라이선스', project: '프로젝트', community: '커뮤니티', issues: '이슈', discussions: '토론', docs: '문서', quickStart: '빠른 시작', agentOS: '에이전트 운영체제', agentOSDesc: '프로덕션 등급, Rust 기반.' }
+  },
+  'zh-TW': {
+    nav: { features: '功能', comparison: '比較', docs: '文檔', github: 'GitHub' },
+    hero: { badge: '開源', title: '代理操作系統', subtitle: 'Rust 構建的生產級自主 AI。180ms 冷啟動，40MB 記憶體，16 層安全，40 個頻道適配器。', getStarted: '開始使用', githubRepo: 'GitHub 倉庫', systemPreview: '系統預覽' },
+    stats: { coldStart: '冷啟動', memory: '記憶體', security: '安全層', channels: '頻道' },
+    features: { title: '內建能力單元', subtitle: '開箱即用的七個自主能力單元', feature1Title: '七大能力單元，無限自動化', feature1Desc: '每個 Hand 都是一個獨立的自動化單元，配有專屬模型、工具和工作流。可以把它們想像成午夜上班、永遠不要求加薪的 AI 員工。' },
+    featureCards: [
+      { title: 'Clip', description: '自動將 YouTube 影片轉換為直式短影片，配有 AI 字幕和配音。直接發布到 Telegram。你的內容管道自動運行——無需編輯。' },
+      { title: 'Lead', description: '每日自主潛在客戶發現，基於 ICP 評分，去重和 CSV 匯出。每天早上醒來都會收到新的合格潛在客戶名單。' },
+      { title: 'Collector', description: 'OSINT 級情報監控，配備變更檢測。追蹤競爭對手、新聞和信號——只在有意義的變化發生時提醒你。' },
+      { title: 'Predictor', description: '具有校準概率推理的超級預測引擎。在競爭對手之前預測市場走向和業務結果。' },
+      { title: 'Researcher', description: '具有可信度評估的深度自主研究。產生帶有來源質量評分的結構化報告——不僅僅是網路搜尋摘要。' },
+      { title: 'Twitter + Browser', description: '帶人工審核門檻的自主 X/Twitter 管理。完整的瀏覽器自動化與購買防護——強大而不失控。' }
+    ],
+    workflows: { title: '可以構建什麼？', subtitle: '用於自主運行的生產就緒工作流', workflow1Title: '用一個 Hand 替代整個工作流', workflow1Desc: 'Librefang 不僅僅是協助——它會接管。這些是你原本需要僱人來做的工作。' },
+    workflowCards: [
+      { title: '內容管道', description: 'Clip + Twitter 協同工作：監控趨勢影片、剪輯短片、新增字幕、發布到社群媒體——全都在你離線時完成。' },
+      { title: '銷售潛在客戶', description: 'Lead 每晚運行：發現潛在客戶、按 ICP 匹配評分，去重、匯出乾淨的 CSV。醒來就能開始銷售。' },
+      { title: '競爭情報', description: 'Collector 監控競爭對手網站，定價、招聘公告和新聞。一旦有變化就提醒你——不是等你注意到之後。' },
+      { title: '多代理編排', description: '使用工作流編排鏈接 Hands。構建這樣的管道：Researcher → Predictor → Clip → 一次性廣播到 40 個頻道。' },
+      { title: '從 OpenClaw 遷移', description: '一條命令遷移：librefang migrate --from openclaw。你的代理、記憶和技能會自動轉移，無需手動配置。' },
+      { title: '生產級安全', description: 'WASM 沙箱、Merkle 審計鏈、SSRF 防護、提示注入掃描、GCRA 速率限制——16 層安全保障，放心部署。' }
+    ],
+    comparison: { title: '效能比較', subtitle: 'Librefang 與其他代理框架的對比', openclaw: 'OpenClaw', zeroclaw: 'ZeroClaw', librefang: 'Librefang', metric: '指標', librefangVs: 'Librefang vs OpenClaw vs ZeroClaw', subtitle2: 'Rust 構建。為生產環境設計，非原型。' },
+    install: { title: '開始使用', subtitle: '安裝 Librefang 並在幾分鐘內開始構建自主代理', requirements: '需求', whatYouGet: '你將獲得', threeSteps: '三步實現自主 AI', install: '安裝', initialize: '初始化', initializeDesc: '按照互動式設定連接你的 LLM API 金鑰和訊息頻道', startAgents: '啟動代理', startAgentsDesc: '代理作為後台守護程序運行。使用桌面應用或 Web UI 監控和管理。', copy: '複製', copied: '已複製！', curl: 'curl -fsSL', or: '或', npm: 'npm', pnpm: 'pnpm', cargo: 'cargo', brew: 'brew', installText: 'install', more: '更多安裝選項', singleBinary: '一條命令，然後離開', singleBinaryDesc: '單一二進制檔案。 無需 Docker。可以在筆電、VPS 或樹莓派上運行。60 秒內啟動自主代理。', platforms: 'Linux / macOS / Windows', desktopApp: 'Tauri 2.0 原生桌面應用' },
+    faq: { title: '常見問題', items: [
+      { question: '什麼是 Librefang？', answer: 'Librefang 是用 Rust 構建的生產級代理操作系統。與聊天機器人框架不同，它旨在按計劃 24/7 運行自主代理——無需用戶提示。把它想像成 AI 代理底層的操作系統，提供運行時，安全和頻道基礎設施。' },
+      { question: '和 OpenClaw 有什麼區別？', answer: 'OpenClaw 非常適合個人使用和實驗。Librefang 是你需要生產級可靠性時的選擇——Rust 替代 TypeScript，16 層安全替代基本沙箱，內建 Hands 替代插件粘合代碼。Librefang 還包含內建遷移路徑：librefang migrate --from openclaw。' },
+      { question: '什麼是 Hands？', answer: 'Hands 是 Librefang 的自主能力單元——想想增強版的插件，但獨立完整。每個 Hand 都配有指定的模型、工具和工作流。你不需要連接任何東西——只需啟動 Hand。七個內建 Hands 涵蓋影片（Clip）、潛在客戶（Lead）、情報（Collector）、預測（Predictor）、研究（Researcher）、社群媒體（Twitter）和網路自動化（Browser）。' },
+      { question: '支援哪些 LLM 提供商？', answer: 'Librefang 支援 12 個主流 LLM 提供商，包括 Anthropic、OpenAI、Gemini、Groq、DeepSeek、Mistral、Together、Ollama、vLLM 等——共計 123+ 型號。所有提供商都需要 API 金鑰；暫不支援 OAuth。每個 Hand 都可以配置使用不同的提供商。' },
+      { question: '支援哪些頻道？', answer: 'Librefang 支援 40 個頻道適配器——這是所有代理框架中最廣泛的覆蓋。包括 Telegram、Discord、Slack、WhatsApp、Signal、Matrix、Teams、Google Chat、飛書、釘釘、Mastodon、Bluesky、LinkedIn、Reddit、IRC 等 24+ 個。如果你的團隊使用它，Librefang 很可能能連接。' },
+      { question: '可以用於生產環境了嗎？', answer: 'Librefang v0.10 通過了 1,767+ 測試，零 Clippy 警告。它有 16 層獨立安全包括 WASM 沙箱、Merkle 哈希鏈審計追蹤和 SSRF 防護。在 v1.0 之前可能會有破壞性 API 變化，因此在生產環境中請鎖定版本。核心運行時穩定，已在生產部署中使用。' },
+      { question: 'GitHub 倉庫在哪裡？', answer: '在 GitHub 上找到 Librefang：github.com/librefang/librefang。給專案加星標以關注版本更新。' },
+    ]},
+    footer: { description: 'Librefang 是用 Rust 構建的生產級代理操作系統。開源、注重隱私，專為 24/7 自主運行而設計。', privacy: '隱私', license: '許可證', project: '專案', community: '社區', issues: '問題', discussions: '討論', docs: '文檔', quickStart: '快速開始', agentOS: '代理操作系統', agentOSDesc: '生產級，Rust 驅動。' }
+  },
+  es: {
+    nav: { features: 'Características', comparison: 'Comparación', docs: 'Docs', github: 'GitHub' },
+    hero: { badge: 'Código Abierto', title: 'Sistema Operativo de Agentes', subtitle: 'IA Autónoma de Grado de Producción construido en Rust. 180ms inicio en frío, 40MB memoria, 16 capas de seguridad, 40 adaptadores de canales.', getStarted: 'Comenzar', githubRepo: 'Repositorio GitHub', systemPreview: 'Vista Previa del Sistema' },
+    stats: { coldStart: 'Inicio en Frío', memory: 'Memoria', security: 'Capas de Seguridad', channels: 'Canales' },
+    features: { title: 'Hands Integrados', subtitle: 'Siete unidades de capacidad autónoma listas para usar', feature1Title: 'Siete Hands. Automatización Infinita.', feature1Desc: 'Cada Hand es una unidad de automatización autocontenida con su propio modelo, herramientas y flujo de trabajo. Piensa en ellos como empleados de IA que entran a las 12am y nunca piden aumento.' },
+    featureCards: [
+      { title: 'Clip', description: 'Convierte automáticamente videos de YouTube en shorts verticales con subtítulos y voz en IA. Publica directamente en Telegram. Tu pipeline de contenido funciona solo — sin editores necesarios.' },
+      { title: 'Lead', description: 'Descubrimiento autónomo diario de prospectos con puntuación basada en ICP, deduplicación y exportación CSV. Despierta con una lista fresca de prospectos calificados cada mañana.' },
+      { title: 'Collector', description: 'Monitoreo de inteligencia de grado OSINT con detección de cambios. Rastre competidores, noticias y señales — te alerta solo cuando algo significativo cambia.' },
+      { title: 'Predictor', description: 'Motor de superpronósticos con razonamiento probabilístico calibrado. Predice movimientos de mercado y resultados comerciales antes que tus competidores.' },
+      { title: 'Researcher', description: 'Investigación autónoma profunda con evaluación de credibilidad. Produce informes estructurados con puntuación de calidad de fuentes — no solo resúmenes de búsqueda web.' },
+      { title: 'Twitter + Browser', description: 'Gestión autónoma de X/Twitter con puertas de aprobación humanas. Automatización completa del navegador con protecciones de compra — poder sin perder control.' }
+    ],
+    workflows: { title: '¿Qué puedes construir?', subtitle: 'Flujos de trabajo listos para producción para operaciones autónomas', workflow1Title: 'Reemplaza Flujos de Trabajo Completos con un Solo Hand', workflow1Desc: 'Librefang no solo asiste — toma el control. Estas son las operaciones por las que de otra forma contratarías personas.' },
+    workflowCards: [
+      { title: 'Pipeline de Contenido', description: 'Clip + Twitter trabajando juntos: monitorea videos trending, corta shorts, agrega subtítulos, publica en social — todo mientras estás offline.' },
+      { title: 'Prospección de Ventas', description: 'Lead ejecuta cada noche: descubre prospectos, puntúa por ajuste ICP, elimina duplicados, exporta CSV limpio. Despierta listo para vender.' },
+      { title: 'Inteligencia Competitiva', description: 'Collector observa sitios de competidores, precios, bolsas de trabajo y noticias. Te alerta el momento algo cambia — no después de que lo notes.' },
+      { title: 'Orquestación Multi-Agente', description: 'Encadena Hands con orquestación de flujos de trabajo. Construye pipelines como: Researcher → Predictor → Clip → broadcast a 40 canales en una ejecución.' },
+      { title: 'Migrar desde OpenClaw', description: 'Migración de un comando: librefang migrate --from openclaw. Tus agentes, memoria y habilidades se transfieren sin reconfiguración manual.' },
+      { title: 'Seguridad de Producción', description: 'Sandbox WASM, cadena de auditoría Merkle, protección SSRF, escaneo de inyección de prompts, rate limiting GCRA — 16 capas para que despliegues con confianza.' }
+    ],
+    comparison: { title: 'Cómo Comparamos', subtitle: 'Librefang vs otros frameworks de agentes', openclaw: 'OpenClaw', zeroclaw: 'ZeroClaw', librefang: 'Librefang', metric: 'Métrica', librefangVs: 'Librefang vs OpenClaw vs ZeroClaw', subtitle2: 'Construido en Rust. Diseñado para producción, no prototipos.' },
+    install: { title: 'Comenzar', subtitle: 'Instala Librefang y comienza a construir agentes autónomos en minutos', requirements: 'Requisitos', whatYouGet: 'Lo que Obtienes', threeSteps: 'Tres Pasos hacia la IA Autónoma', install: 'Instalar', initialize: 'Inicializar', initializeDesc: 'Sigue la configuración interactiva para conectar tu clave API de LLM y canales de mensajería', startAgents: 'Iniciar Agentes', startAgentsDesc: 'Los agentes se ejecutan como demonios en segundo plano. Usa la app de escritorio o Web UI para monitorear y gestionar.', copy: 'Copiar', copied: '¡Copiado!', curl: 'curl -fsSL', or: 'o', npm: 'npm', pnpm: 'pnpm', cargo: 'cargo', brew: 'brew', installText: 'install', more: 'Más opciones de instalación', singleBinary: 'Un Comando. Luego vete.', singleBinaryDesc: 'Binario único. Sin Docker necesario. Ejecuta en tu laptop, un VPS o una Raspberry Pi. Inicia agentes autónomos en menos de 60 segundos.', platforms: 'Linux / macOS / Windows', desktopApp: 'App de escritorio nativa Tauri 2.0' },
+    faq: { title: 'Preguntas Frecuentes', items: [
+      { question: '¿Qué es Librefang?', answer: 'Librefang es un Sistema Operativo de Agentes de grado de producción construido en Rust. A diferencia de los frameworks de chatbots, está diseñado para ejecutar agentes autónomos 24/7 según programación — sin necesidad de prompts de usuario. Piensa en él como la capa de SO debajo de tus agentes de IA, proporcionando runtime, seguridad e infraestructura de canales.' },
+      { question: '¿En qué se diferencia de OpenClaw?', answer: 'OpenClaw es genial para uso personal y experimentación. Librefang es lo que usas cuando necesitas confiabilidad de grado de producción — Rust en vez de TypeScript, 16 capas de seguridad en vez de sandboxing básico, Hands integrados en vez de código pegamento de plugins. Librefang también incluye una ruta de migración integrada: librefang migrate --from openclaw.' },
+      { question: '¿Qué son los Hands?', answer: 'Los Hands son las unidades de capacidad autónoma de Librefang — piensa en ellos como plugins mejorados, pero autocontenidos. Cada Hand viene con un modelo designado, herramientas y flujo de trabajo. No cableas nada; simplemente activas el Hand. Los siete Hands integrados cubren video (Clip), prospección (Lead), inteligencia (Collector), predicción (Predictor), investigación (Researcher), redes sociales (Twitter) y automatización web (Browser).' },
+      { question: '¿Qué proveedores LLM se soportan?', answer: 'Librefang soporta 12 proveedores LLM principales incluyendo Anthropic, OpenAI, Gemini, Groq, DeepSeek, Mistral, Together, Ollama, vLLM y más — cubriendo más de 123 modelos en total. Todos los proveedores requieren claves API; OAuth no está soportado actualmente. Cada Hand puede configurarse para usar un proveedor diferente.' },
+      { question: '¿Qué canales se soportan?', answer: 'Librefang soporta 40 adaptadores de canales — la cobertura más amplia de cualquier framework de agentes. Esto incluye Telegram, Discord, Slack, WhatsApp, Signal, Matrix, Teams, Google Chat, Feishu, DingTalk, Mastodon, Bluesky, LinkedIn, Reddit, IRC y más de 24 adicionales. Si tu equipo lo usa, Librefang probablemente pueda conectarse.' },
+      { question: '¿Está listo para producción?', answer: 'Librefang v0.1.0 pasa 1,767+ pruebas con cero advertencias de Clippy. Tiene 16 capas de seguridad discretas incluyendo sandboxing WASM, trail de auditoría con cadena hash Merkle y protección SSRF. Son posibles cambios de API rompientes hasta v1.0, así que fija tu versión en producción. El runtime central es estable y se usa en despliegues de producción hoy.' },
+      { question: '¿Dónde está el repositorio de GitHub?', answer: 'Encuentra Librefang en GitHub: github.com/librefang/librefang. Dale una estrella al proyecto para seguir lanzamientos y actualizaciones.' },
+    ]},
+    footer: { description: 'Librefang es un Sistema Operativo de Agentes de grado de producción construido en Rust. Código abierto, enfocado en privacidad y diseñado para operación autónoma 24/7.', privacy: 'Privacidad', license: 'Licencia', project: 'Proyecto', community: 'Comunidad', issues: 'Issues', discussions: 'Discusiones', docs: 'Docs', quickStart: 'Inicio Rápido', agentOS: 'Sistema Operativo de Agentes', agentOSDesc: 'Grado de producción, impulsado por Rust.' }
   }
 }
 
@@ -146,4 +251,7 @@ export const languages = [
   { code: 'zh', name: '简体中文', url: '/zh/' },
   { code: 'de', name: 'Deutsch', url: '/de/' },
   { code: 'ja', name: '日本語', url: '/ja/' },
+  { code: 'ko', name: '한국어', url: '/ko/' },
+  { code: 'zh-TW', name: '繁體中文', url: '/zh-TW/' },
+  { code: 'es', name: 'Español', url: '/es/' },
 ]

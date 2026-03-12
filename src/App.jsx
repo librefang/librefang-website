@@ -38,9 +38,12 @@ function MaterialIcon({ name, className = '' }) {
 function Header({ t }) {
   const currentLangName = languages.find(l => {
     const path = window.location.pathname
+    if (path.startsWith('/zh-TW')) return l.code === 'zh-TW'
     if (path.startsWith('/zh')) return l.code === 'zh'
     if (path.startsWith('/de')) return l.code === 'de'
     if (path.startsWith('/ja')) return l.code === 'ja'
+    if (path.startsWith('/ko')) return l.code === 'ko'
+    if (path.startsWith('/es')) return l.code === 'es'
     return l.code === 'en'
   })?.name || 'English'
   const [langOpen, setLangOpen] = useState(false)
@@ -490,9 +493,12 @@ function App() {
 
   useEffect(() => {
     const path = window.location.pathname
-    if (path.startsWith('/zh')) setLang('zh')
+    if (path.startsWith('/zh-TW')) setLang('zh-TW')
+    else if (path.startsWith('/zh')) setLang('zh')
     else if (path.startsWith('/de')) setLang('de')
     else if (path.startsWith('/ja')) setLang('ja')
+    else if (path.startsWith('/ko')) setLang('ko')
+    else if (path.startsWith('/es')) setLang('es')
     else setLang('en')
   }, [])
 
