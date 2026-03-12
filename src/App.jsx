@@ -533,10 +533,10 @@ function DocsNav({ t }) {
   ]
 
   return (
-    <section className="px-6 py-20 border-t border-gray-700/50">
+    <section className="px-6 py-20 border-t border-gray-700/50 bg-black/20">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-primary">{t.docs?.title || 'Documentation'}</span>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-white">
+          {t.docs?.title || 'Documentation'}
         </h2>
         <p className="text-gray-400 text-center text-xl mb-16 max-w-2xl mx-auto">
           {t.docs?.subtitle || 'Comprehensive guides for Librefang'}
