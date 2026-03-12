@@ -31,16 +31,6 @@ const comparisonData = [
   { metric: 'Built-in Hands', openclaw: '0', zeroclaw: '0', librefang: '7' },
 ]
 
-const faqs = [
-  { question: 'What is Librefang?', answer: 'Librefang is a production-grade Agent Operating System built in Rust. Unlike chatbot frameworks, it\'s designed to run autonomous agents 24/7 on schedules — without requiring user prompts. Think of it as the OS layer beneath your AI agents, providing runtime, security, and channel infrastructure.' },
-  { question: 'How is it different from OpenClaw?', answer: 'OpenClaw is great for personal use and experimentation. Librefang is what you reach for when you need production-grade reliability — Rust instead of TypeScript, 16 security layers vs basic sandboxing, built-in Hands instead of plugin glue code. Librefang also includes a built-in migration path: librefang migrate --from openclaw.' },
-  { question: 'What are Hands?', answer: 'Hands are Librefang\'s autonomous capability units — think of them as enhanced plugins, but self-contained. Each Hand ships with a designated model, tools, and workflow. You don\'t wire anything together; you just activate the Hand. The seven built-in Hands cover video (Clip), prospecting (Lead), intelligence (Collector), forecasting (Predictor), research (Researcher), social media (Twitter), and web automation (Browser).' },
-  { question: 'Which LLM providers are supported?', answer: 'Librefang supports 12 mainstream LLM providers including Anthropic, OpenAI, Gemini, Groq, DeepSeek, Mistral, Together, Ollama, vLLM, and more — covering 123+ models total. All providers require API keys; OAuth is not currently supported. Each Hand can be configured to use a different provider.' },
-  { question: 'Which channels are supported?', answer: 'Librefang supports 40 channel adapters — the broadest coverage of any agent framework. This includes Telegram, Discord, Slack, WhatsApp, Signal, Matrix, Teams, Google Chat, Feishu, DingTalk, Mastodon, Bluesky, LinkedIn, Reddit, IRC, and 24+ more. If your team uses it, Librefang probably connects to it.' },
-  { question: 'Is it production-ready?', answer: 'Librefang v0.1.0 passes 1,767+ tests with zero Clippy warnings. It has 16 discrete security layers including WASM sandboxing, Merkle hash-chain audit trail, and SSRF protection. Breaking API changes are possible until v1.0, so pin your version in production. The core runtime is stable and used in production deployments today.' },
-  { question: 'Where is the GitHub repository?', answer: 'Find Librefang on GitHub: github.com/RightNow-AI/librefang. Star the project to follow releases and feature updates.' },
-]
-
 function MaterialIcon({ name, className = '' }) {
   return <span className={`material-symbols-outlined ${className}`}>{name}</span>
 }
@@ -420,9 +410,9 @@ function FAQ({ t }) {
   return (
     <section className="px-6 py-32" id="faq">
       <div className="max-w-3xl mx-auto space-y-16">
-        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-center text-white">Frequently Asked Questions</h2>
+        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-center text-white">{t.faq.title}</h2>
         <div className="space-y-6">
-          {faqs.map((faq, i) => (
+          {t.faq.items.map((faq, i) => (
             <details key={i} className="group bg-white/5 rounded-[2rem] border border-gray-700/50 overflow-hidden transition-all duration-500" open={i === 0}>
               <summary className="flex items-center justify-between p-8 cursor-pointer select-none list-none">
                 <h3 className="font-extrabold text-white text-xl">{faq.question}</h3>
@@ -452,31 +442,31 @@ function Footer({ t }) {
             </div>
             <span className="font-black text-2xl tracking-tight text-white">Librefang</span>
           </a>
-          <p className="text-gray-400 text-lg max-w-xs text-center md:text-left leading-relaxed">Agent Operating System. Production-grade, Rust-powered.</p>
+          <p className="text-gray-400 text-lg max-w-xs text-center md:text-left leading-relaxed">{t.footer.agentOSDesc}</p>
         </div>
         <nav className="grid grid-cols-2 sm:grid-cols-3 gap-16 text-sm">
           <div className="space-y-6">
-            <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">Project</h4>
+            <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">{t.footer.project}</h4>
             <ul className="flex flex-col gap-4 text-gray-400 font-bold">
-              <li><a className="hover:text-primary transition-colors" href="#features">Features</a></li>
-              <li><a className="hover:text-primary transition-colors" href="#comparison">Comparison</a></li>
-              <li><a className="hover:text-primary transition-colors" href="#install">Docs</a></li>
+              <li><a className="hover:text-primary transition-colors" href="#features">{t.nav.features}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="#comparison">{t.nav.comparison}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="#install">{t.nav.docs}</a></li>
             </ul>
           </div>
           <div className="space-y-6">
-            <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">Community</h4>
+            <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">{t.footer.community}</h4>
             <ul className="flex flex-col gap-4 text-gray-400 font-bold">
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/issues" target="_blank" rel="noopener noreferrer">Issues</a></li>
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/discussions" target="_blank" rel="noopener noreferrer">Discussions</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/issues" target="_blank" rel="noopener noreferrer">{t.footer.issues}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/discussions" target="_blank" rel="noopener noreferrer">{t.footer.discussions}</a></li>
               <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             </ul>
           </div>
           <div className="space-y-6 hidden sm:block">
-            <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">Docs</h4>
+            <h4 className="font-black text-primary uppercase tracking-[0.2em] text-xs">{t.footer.docs}</h4>
             <ul className="flex flex-col gap-4 text-gray-400 font-bold">
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang#readme" target="_blank" rel="noopener noreferrer">Quick Start</a></li>
-              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a></li>
-              <li><a className="hover:text-primary transition-colors" href="/privacy/">Privacy</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang#readme" target="_blank" rel="noopener noreferrer">{t.footer.quickStart}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="https://github.com/RightNow-AI/librefang/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">{t.footer.license}</a></li>
+              <li><a className="hover:text-primary transition-colors" href="/privacy/">{t.footer.privacy}</a></li>
             </ul>
           </div>
         </nav>
@@ -486,7 +476,7 @@ function Footer({ t }) {
         <div className="flex gap-8">
           <span className="flex items-center gap-2">
             <span className="size-2 bg-primary rounded-full animate-pulse"></span>
-            Open Source
+            {t.hero.badge}
           </span>
           <span>Rust-Powered</span>
         </div>
