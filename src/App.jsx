@@ -163,7 +163,7 @@ function Hero({ t }) {
     staleTime: 1000 * 60 * 30,
   })
 
-  const version = release?.tag_name || 'v0.3.47'
+  const version = release?.tag_name ?? 'v0.3.47'
 
   return (
     <header className="relative px-6 pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden">
