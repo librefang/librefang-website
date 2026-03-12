@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import { translations, languages } from './i18n'
-import { ExternalLink, Globe, ChevronDown, Menu, X, ClipboardCheck, Settings, BadgeCheck, Code, Bug, MessageCircle, Copy, Check, Video, UserSearch, Radar, TrendingUp, Activity, Filter, Network, RefreshCw, Shield, Library, Monitor } from 'lucide-react'
+import { ExternalLink, Globe, ChevronDown, Menu, X, ClipboardCheck, Settings, BadgeCheck, Code, Bug, MessageCircle, Copy, Check, Video, UserSearch, Radar, TrendingUp, Activity, Filter, Network, RefreshCw, Shield, Library, Monitor, SearchCheck, Rss } from 'lucide-react'
 
 const queryClient = new QueryClient()
 
@@ -58,6 +58,8 @@ function MaterialIcon({ name, className = '' }) {
     security: Shield,
     video_library: Library,
     monitoring: Activity,
+    manage_search: SearchCheck,
+    rss_feed: Rss,
   }
   const Icon = icons[name]
   if (!Icon) return <span className={className}>{name}</span>
