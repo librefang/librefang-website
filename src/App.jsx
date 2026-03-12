@@ -488,49 +488,21 @@ function FAQ({ t }) {
 }
 
 function GitHubStats({ t }) {
-  const { data: repoData, isError: repoError } = useQuery({
-    queryKey: ['repoStats'],
+  // Use worker proxy for GitHub stats (avoids rate limits)
+  const { data: githubData, isError: githubError } = useQuery({
+    queryKey: ['githubStats'],
     queryFn: async () => {
-      const res = await fetch('https://api.github.com/repos/librefang/librefang', {
-        headers: { 'Accept': 'application/vnd.github.v3+json' },
-      })
-      if (!res.ok) throw new Error('Failed to fetch')
-      return res.json()
+      try {
+        const res = await fetch('https://librefang-counter.suzukaze-haduki.workers.dev/api/github')
+        if (!res.ok) throw new Error('Failed to fetch')
+        return res.json()
+      } catch {
+        return { stars: 0, forks: 0, issues: 0, lastUpdate: '', downloads: 0 }
+      }
     },
     staleTime: 1000 * 60 * 30,
-    retry: 0,
+    retry: 1,
   })
-
-  const { data: commitsData } = useQuery({
-    queryKey: ['commits'],
-    queryFn: async () => {
-      const res = await fetch('https://api.github.com/repos/librefang/librefang/commits?per_page=1', {
-        headers: { 'Accept': 'application/vnd.github.v3+json' },
-      })
-      if (!res.ok) throw new Error('Failed to fetch')
-      return res.json()
-    },
-    staleTime: 1000 * 60 * 30,
-    retry: 0,
-  })
-
-  const { data: releasesData } = useQuery({
-    queryKey: ['releases'],
-    queryFn: async () => {
-      const res = await fetch('https://api.github.com/repos/librefang/librefang/releases?per_page=10', {
-        headers: { 'Accept': 'application/vnd.github.v3+json' },
-      })
-      if (!res.ok) throw new Error('Failed to fetch')
-      return res.json()
-    },
-    staleTime: 1000 * 60 * 60,
-    retry: 0,
-  })
-
-  const totalDownloads = releasesData?.reduce((sum, rel) => {
-    const assetDownloads = rel.assets?.reduce((s, a) => s + (a.download_count || 0), 0) || 0
-    return sum + assetDownloads
-  }, 0) ?? 0
 
   const { data: docsData } = useQuery({
     queryKey: ['docsVisits'],
@@ -548,10 +520,11 @@ function GitHubStats({ t }) {
   })
 
   const docsVisits = docsData?.total ?? 0
-  const stars = repoData?.stargazers_count ?? (repoError ? null : 0)
-  const forks = repoData?.forks_count ?? 0
-  const commits = commitsData?.[0]?.sha || ''
-  const lastUpdate = repoData?.updated_at ? new Date(repoData.updated_at).toLocaleDateString() : ''
+  const stars = githubError ? null : (githubData?.stars ?? 0)
+  const forks = githubData?.forks ?? 0
+  const issues = githubData?.issues ?? 0
+  const downloads = githubData?.downloads ?? 0
+  const lastUpdate = githubData?.lastUpdate ? new Date(githubData.lastUpdate).toLocaleDateString() : ''
 
   return (
     <section className="px-6 py-20 border-t border-gray-700/50">
@@ -572,7 +545,7 @@ function GitHubStats({ t }) {
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.forks || 'Forks'}</div>
           </div>
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-3xl font-black text-primary mb-1">{totalDownloads >= 1000 ? `${(totalDownloads/1000).toFixed(1)}k` : totalDownloads}</div>
+            <div className="text-3xl font-black text-primary mb-1">{downloads >= 1000 ? `${(downloads/1000).toFixed(1)}k` : downloads}</div>
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.downloads || 'Downloads'}</div>
           </div>
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
@@ -580,7 +553,7 @@ function GitHubStats({ t }) {
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.docsVisits || 'Docs Visits'}</div>
           </div>
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-3xl font-black text-primary mb-1">{repoData?.open_issues_count ?? '-'}</div>
+            <div className="text-3xl font-black text-primary mb-1">{issues >= 1000 ? `${(issues/1000).toFixed(1)}k` : issues}</div>
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.issues || 'Issues'}</div>
           </div>
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
