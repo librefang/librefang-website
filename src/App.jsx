@@ -164,7 +164,6 @@ function Hero({ t }) {
     },
     staleTime: 1000 * 60 * 60,
     retry: 0,
-    initialData: { tag_name: 'v0.3.48' },
   })
 
   const version = release?.tag_name || ''
