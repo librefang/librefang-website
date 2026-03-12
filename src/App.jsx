@@ -156,11 +156,14 @@ function Hero({ t }) {
   const { data: release } = useQuery({
     queryKey: ['latestRelease'],
     queryFn: async () => {
-      const res = await fetch('https://api.github.com/repos/librefang/librefang/releases/latest')
+      const res = await fetch('https://api.github.com/repos/librefang/librefang/releases/latest', {
+        headers: { 'Accept': 'application/vnd.github.v3+json' },
+      })
       if (!res.ok) throw new Error('Failed to fetch')
       return res.json()
     },
     staleTime: 1000 * 60 * 60,
+    retry: 0,
     initialData: { tag_name: 'v0.3.47' },
   })
 
@@ -488,23 +491,27 @@ function GitHubStats({ t }) {
   const { data: repoData, isError: repoError } = useQuery({
     queryKey: ['repoStats'],
     queryFn: async () => {
-      const res = await fetch('https://api.github.com/repos/librefang/librefang')
+      const res = await fetch('https://api.github.com/repos/librefang/librefang', {
+        headers: { 'Accept': 'application/vnd.github.v3+json' },
+      })
       if (!res.ok) throw new Error('Failed to fetch')
       return res.json()
     },
     staleTime: 1000 * 60 * 30,
-    retry: 1,
+    retry: 0,
   })
 
   const { data: commitsData } = useQuery({
     queryKey: ['commits'],
     queryFn: async () => {
-      const res = await fetch('https://api.github.com/repos/librefang/librefang/commits?per_page=1')
+      const res = await fetch('https://api.github.com/repos/librefang/librefang/commits?per_page=1', {
+        headers: { 'Accept': 'application/vnd.github.v3+json' },
+      })
       if (!res.ok) throw new Error('Failed to fetch')
       return res.json()
     },
     staleTime: 1000 * 60 * 30,
-    retry: 1,
+    retry: 0,
   })
 
   const stars = repoData?.stargazers_count ?? (repoError ? null : 0)
