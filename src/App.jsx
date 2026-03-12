@@ -152,7 +152,7 @@ function Hero() {
               <svg fill="currentColor" height="20" width="20" viewBox="0 0 256 256">
                 <path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68Z"></path>
               </svg>
-              GitHub Repo
+              {t.hero.githubRepo}
             </a>
           </div>
         </div>
@@ -163,7 +163,7 @@ function Hero() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#080c10]/90 via-transparent to-transparent pointer-events-none"></div>
               <div className="absolute bottom-8 left-8 flex items-center gap-3 pointer-events-none">
                 <div className="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-                <span className="text-xs font-black uppercase tracking-[0.3em] text-primary">System Preview</span>
+                <span className="text-xs font-black uppercase tracking-[0.3em] text-primary">{t.hero.systemPreview}</span>
               </div>
             </div>
           </div>
@@ -201,8 +201,8 @@ function Features() {
     <section className="px-6 py-32 bg-[#0d1117] rounded-section mx-4 md:mx-12" id="features">
       <div className="max-w-7xl mx-auto space-y-20">
         <header className="text-center space-y-6">
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">Seven Hands. Infinite Automation.</h2>
-          <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto">Each Hand is a self-contained automation unit with its own model, tools, and workflow. Think of them as AI employees that clock in at midnight and never ask for a raise.</p>
+          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">{t.features.feature1Title}</h2>
+          <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto">{t.features.feature1Desc}</p>
           <div className="h-2 w-32 bg-primary mx-auto rounded-full"></div>
         </header>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
