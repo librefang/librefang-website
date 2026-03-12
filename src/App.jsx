@@ -55,6 +55,17 @@ function Header({ t }) {
   const [langOpen, setLangOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false)
+        setLangOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [])
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 px-4 md:px-12 py-4 glass-effect" role="navigation" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -93,7 +104,7 @@ function Header({ t }) {
               <path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68Z"></path>
             </svg>
           </a>
-          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setMobileMenuOpen(!mobileMenuOpen) }} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileMenuOpen}>
             <MaterialIcon name={mobileMenuOpen ? 'close' : 'menu'} />
           </button>
         </div>
@@ -442,7 +453,7 @@ function FAQ({ t }) {
 }
 
 function GitHubStats({ t }) {
-  const { data: repoData } = useQuery({
+  const { data: repoData, isError: repoError } = useQuery({
     queryKey: ['repoStats'],
     queryFn: async () => {
       const res = await fetch('https://api.github.com/repos/librefang/librefang')
@@ -450,6 +461,7 @@ function GitHubStats({ t }) {
       return res.json()
     },
     staleTime: 1000 * 60 * 30,
+    retry: 1,
   })
 
   const { data: commitsData } = useQuery({
@@ -460,10 +472,11 @@ function GitHubStats({ t }) {
       return res.json()
     },
     staleTime: 1000 * 60 * 30,
+    retry: 1,
   })
 
-  const stars = repoData?.stargazers_count || 0
-  const forks = repoData?.forks_count || 0
+  const stars = repoData?.stargazers_count ?? (repoError ? null : 0)
+  const forks = repoData?.forks_count ?? 0
   const commits = commitsData?.[0]?.sha || ''
   const lastUpdate = repoData?.updated_at ? new Date(repoData.updated_at).toLocaleDateString() : ''
 
@@ -478,19 +491,19 @@ function GitHubStats({ t }) {
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2">{stars >= 1000 ? `${(stars/1000).toFixed(1)}k` : stars}</div>
+            <div className="text-5xl font-black text-primary mb-2">{stars === null ? '-' : stars >= 1000 ? `${(stars/1000).toFixed(1)}k` : stars}</div>
             <div className="text-gray-400 font-semibold">{t.githubStats?.stars || 'Stars'}</div>
           </div>
           <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2">{forks >= 1000 ? `${(forks/1000).toFixed(1)}k` : forks}</div>
+            <div className="text-5xl font-black text-primary mb-2">{forks === null ? '-' : forks >= 1000 ? `${(forks/1000).toFixed(1)}k` : forks}</div>
             <div className="text-gray-400 font-semibold">{t.githubStats?.forks || 'Forks'}</div>
           </div>
           <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2">{repoData?.open_issues_count || 0}</div>
+            <div className="text-5xl font-black text-primary mb-2">{repoData?.open_issues_count ?? '-'}</div>
             <div className="text-gray-400 font-semibold">{t.githubStats?.issues || 'Issues'}</div>
           </div>
           <div className="text-center p-8 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-5xl font-black text-primary mb-2 text-2xl">{lastUpdate}</div>
+            <div className="text-5xl font-black text-primary mb-2 text-2xl">{lastUpdate || '-'}</div>
             <div className="text-gray-400 font-semibold">{t.githubStats?.lastUpdate || 'Last Update'}</div>
           </div>
         </div>
