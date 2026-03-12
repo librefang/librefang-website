@@ -25,11 +25,17 @@ async function recordDailyStars(env) {
     if (res.ok) {
       const data = await res.json()
       const today = new Date().toISOString().split('T')[0]
+
+      // Record all metrics
       await env.KV.put('stars_' + today, String(data.stargazers_count || 0))
-      console.log('Recorded stars:', today, data.stargazers_count)
+      await env.KV.put('forks_' + today, String(data.forks_count || 0))
+      await env.KV.put('issues_' + today, String(data.open_issues_count || 0))
+      await env.KV.put('downloads_' + today, '0') // Downloads recorded separately from releases
+
+      console.log('Recorded:', today, 'stars:', data.stargazers_count, 'forks:', data.forks_count, 'issues:', data.open_issues_count)
     }
   } catch (e) {
-    console.error('Failed to record stars:', e.message)
+    console.error('Failed to record stats:', e.message)
   }
 }
 
@@ -60,15 +66,29 @@ async function handleGitHubStats(env, cors) {
   const cacheTimeKey = 'github_stats_time'
   const cacheDuration = 1000 * 60 * 30 // 30 minutes
 
+  console.log('GITHUB_TOKEN exists:', !!env.GITHUB_TOKEN)
+
   try {
     // Check cache
-    const cached = await env.KV.get(cacheKey)
-    const cacheTime = parseInt(await env.KV.get(cacheTimeKey) || '0', 10)
+    let cached, cacheTime
+    try {
+      cached = await env.KV.get(cacheKey)
+      cacheTime = parseInt(await env.KV.get(cacheTimeKey) || '0', 10)
+    } catch (e) {
+      console.log('KV get error:', e.message)
+    }
 
     if (cached && cacheTime && (Date.now() - cacheTime < cacheDuration)) {
+      console.log('Returning cached response')
       return new Response(cached, {
-        headers: { 'Content-Type': 'application/json', ...cors }
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+          ...cors
+        }
       })
+    } else {
+      console.log('Cache miss or expired, fetching from GitHub')
     }
 
     // Fetch from GitHub
@@ -86,16 +106,23 @@ async function handleGitHubStats(env, cors) {
       fetch('https://api.github.com/repos/librefang/librefang/releases?per_page=10', { headers }),
     ])
 
+    console.log('repoRes status:', repoRes.status, repoRes.ok)
+    console.log('releasesRes status:', releasesRes.status, releasesRes.ok)
+
+    console.log('repoRes.ok:', repoRes.ok, 'status:', repoRes.status)
     const repo = repoRes.ok ? await repoRes.json() : {}
+    console.log('repo stargazers_count:', repo.stargazers_count)
     const releases = releasesRes.ok ? await releasesRes.json() : []
 
     const downloads = releases.reduce((sum, rel) => {
       return sum + (rel.assets?.reduce((s, a) => s + (a.download_count || 0), 0) || 0)
     }, 0)
 
-    // Record today's stars
+    // Record today's all metrics
     const today = new Date().toISOString().split('T')[0]
     await env.KV.put('stars_' + today, String(repo.stargazers_count || 0))
+    await env.KV.put('forks_' + today, String(repo.forks_count || 0))
+    await env.KV.put('issues_' + today, String(repo.open_issues_count || 0))
 
     // Get last 30 days history
     const history = []
@@ -104,8 +131,15 @@ async function handleGitHubStats(env, cors) {
       d.setDate(d.getDate() - i)
       const dateStr = d.toISOString().split('T')[0]
       const stars = await env.KV.get('stars_' + dateStr)
+      const forks = await env.KV.get('forks_' + dateStr)
+      const issues = await env.KV.get('issues_' + dateStr)
       if (stars) {
-        history.push({ date: dateStr, stars: parseInt(stars, 10) })
+        history.push({
+          date: dateStr,
+          stars: parseInt(stars, 10),
+          forks: forks ? parseInt(forks, 10) : 0,
+          issues: issues ? parseInt(issues, 10) : 0
+        })
       }
     }
 
@@ -122,8 +156,13 @@ async function handleGitHubStats(env, cors) {
     const json = JSON.stringify(result)
 
     // Cache
-    await env.KV.put(cacheKey, json)
-    await env.KV.put(cacheTimeKey, String(Date.now()))
+    try {
+      await env.KV.put(cacheKey, json)
+      await env.KV.put(cacheTimeKey, String(Date.now()))
+      console.log('Cached response, KV write successful')
+    } catch (e) {
+      console.log('KV put error:', e.message, e.stack)
+    }
 
     return new Response(json, {
       headers: { 'Content-Type': 'application/json', ...cors }

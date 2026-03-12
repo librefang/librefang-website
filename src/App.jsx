@@ -531,7 +531,18 @@ function GitHubStats({ t }) {
   const starHistory = starHistoryData.length > 0
     ? starHistoryData.map(d => d.stars)
     : (stars > 0 ? [stars] : [])
-  const maxStars = Math.max(...starHistory, 1)
+  const forksHistory = starHistoryData.length > 0
+    ? starHistoryData.map(d => d.forks)
+    : (forks > 0 ? [forks] : [])
+  const issuesHistory = starHistoryData.length > 0
+    ? starHistoryData.map(d => d.issues)
+    : (issues > 0 ? [issues] : [])
+
+  const [historyTab, setHistoryTab] = useState('stars')
+  const currentHistory = historyTab === 'stars' ? starHistory : historyTab === 'forks' ? forksHistory : issuesHistory
+  const currentMax = Math.max(...currentHistory, 1)
+  const currentLabel = historyTab === 'stars' ? (t.githubStats?.stars || 'Stars') : historyTab === 'forks' ? (t.githubStats?.forks || 'Forks') : (t.githubStats?.issues || 'Issues')
+  const currentValue = historyTab === 'stars' ? stars : historyTab === 'forks' ? forks : issues
 
   return (
     <section className="px-6 py-20 border-t border-gray-700/50">
@@ -572,16 +583,32 @@ function GitHubStats({ t }) {
         {/* Star History */}
         <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-gray-700/30">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-bold text-white">{t.githubStats?.starHistory || 'Star History'}</h3>
+            <h3 className="text-lg font-bold text-white">{t.githubStats?.starHistory || 'History'}</h3>
             <a href="https://star-history.com/#librefang/librefang" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">View Full Chart →</a>
           </div>
+          {/* Tabs */}
+          <div className="flex gap-2 mb-4">
+            {['stars', 'forks', 'issues'].map(tab => (
+              <button
+                key={tab}
+                onClick={() => setHistoryTab(tab)}
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                  historyTab === tab
+                    ? 'bg-primary text-white'
+                    : 'bg-white/10 text-gray-400 hover:bg-white/20'
+                }`}
+              >
+                {tab === 'stars' ? (t.githubStats?.stars || 'Stars') : tab === 'forks' ? (t.githubStats?.forks || 'Forks') : (t.githubStats?.issues || 'Issues')}
+              </button>
+            ))}
+          </div>
           <div className="h-48 flex items-end gap-1 overflow-x-auto">
-            {starHistory.length > 0 ? (
+            {currentHistory.length > 0 ? (
               Array.from({ length: 12 }, (_, i) => {
-                const idx = Math.floor((i / 12) * starHistory.length)
-                const monthStars = starHistory[idx] || 0
+                const idx = Math.floor((i / 12) * currentHistory.length)
+                const value = currentHistory[idx] || 0
                 return (
-                  <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t min-w-4" style={{ height: `${Math.max(5, (monthStars / maxStars) * 100)}%` }} title={`${monthStars} stars`}></div>
+                  <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t min-w-4" style={{ height: `${Math.max(5, (value / currentMax) * 100)}%` }} title={`${value} ${historyTab}`}></div>
                 )
               })
             ) : (
@@ -590,7 +617,7 @@ function GitHubStats({ t }) {
           </div>
           <div className="flex justify-between mt-2 text-xs text-gray-500">
             <span>12 months ago</span>
-            <span>Now ({stars || '-'})</span>
+            <span>Now ({currentValue ?? '-'})</span>
           </div>
         </div>
         <div className="flex justify-center gap-6 mt-12">
