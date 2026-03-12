@@ -523,6 +523,7 @@ function GitHubStats({ t }) {
   const stars = githubError ? null : (githubData?.stars ?? 0)
   const forks = githubData?.forks ?? 0
   const issues = githubData?.issues ?? 0
+  const prs = githubData?.prs ?? 0
   const downloads = githubData?.downloads ?? 0
   const lastUpdate = githubData?.lastUpdate ? new Date(githubData.lastUpdate).toLocaleDateString() : ''
 
@@ -537,12 +538,15 @@ function GitHubStats({ t }) {
   const issuesHistory = starHistoryData.length > 0
     ? starHistoryData.map(d => d.issues)
     : (issues > 0 ? [issues] : [])
+  const prsHistory = starHistoryData.length > 0
+    ? starHistoryData.map(d => d.prs)
+    : (prs > 0 ? [prs] : [])
 
   const [historyTab, setHistoryTab] = useState('stars')
-  const currentHistory = historyTab === 'stars' ? starHistory : historyTab === 'forks' ? forksHistory : issuesHistory
+  const currentHistory = historyTab === 'stars' ? starHistory : historyTab === 'forks' ? forksHistory : historyTab === 'issues' ? issuesHistory : prsHistory
   const currentMax = Math.max(...currentHistory, 1)
-  const currentLabel = historyTab === 'stars' ? (t.githubStats?.stars || 'Stars') : historyTab === 'forks' ? (t.githubStats?.forks || 'Forks') : (t.githubStats?.issues || 'Issues')
-  const currentValue = historyTab === 'stars' ? stars : historyTab === 'forks' ? forks : issues
+  const currentLabel = historyTab === 'stars' ? (t.githubStats?.stars || 'Stars') : historyTab === 'forks' ? (t.githubStats?.forks || 'Forks') : historyTab === 'issues' ? (t.githubStats?.issues || 'Issues') : (t.githubStats?.prs || 'PRs')
+  const currentValue = historyTab === 'stars' ? stars : historyTab === 'forks' ? forks : historyTab === 'issues' ? issues : prs
 
   return (
     <section className="px-6 py-20 border-t border-gray-700/50">
@@ -553,7 +557,7 @@ function GitHubStats({ t }) {
         <p className="text-gray-400 text-center text-xl mb-16 max-w-2xl mx-auto">
           {t.githubStats?.subtitle || 'Help us build the future of autonomous AI agents'}
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
             <div className="text-3xl font-black text-primary mb-1">{stars === null ? '-' : stars >= 1000 ? `${(stars/1000).toFixed(1)}k` : stars}</div>
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.stars || 'Stars'}</div>
@@ -575,6 +579,10 @@ function GitHubStats({ t }) {
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.issues || 'Issues'}</div>
           </div>
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
+            <div className="text-3xl font-black text-primary mb-1">{prs >= 1000 ? `${(prs/1000).toFixed(1)}k` : prs}</div>
+            <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.prs || 'PRs'}</div>
+          </div>
+          <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
             <div className="text-2xl font-black text-primary mb-1">{lastUpdate || '-'}</div>
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.lastUpdate || 'Last Update'}</div>
           </div>
@@ -588,7 +596,7 @@ function GitHubStats({ t }) {
           </div>
           {/* Tabs */}
           <div className="flex gap-2 mb-4">
-            {['stars', 'forks', 'issues'].map(tab => (
+            {['stars', 'forks', 'issues', 'prs'].map(tab => (
               <button
                 key={tab}
                 onClick={() => setHistoryTab(tab)}
@@ -598,7 +606,7 @@ function GitHubStats({ t }) {
                     : 'bg-white/10 text-gray-400 hover:bg-white/20'
                 }`}
               >
-                {tab === 'stars' ? (t.githubStats?.stars || 'Stars') : tab === 'forks' ? (t.githubStats?.forks || 'Forks') : (t.githubStats?.issues || 'Issues')}
+                {tab === 'stars' ? (t.githubStats?.stars || 'Stars') : tab === 'forks' ? (t.githubStats?.forks || 'Forks') : tab === 'issues' ? (t.githubStats?.issues || 'Issues') : (t.githubStats?.prs || 'PRs')}
               </button>
             ))}
           </div>
