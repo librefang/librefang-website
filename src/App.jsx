@@ -1,71 +1,8 @@
 import { useState, useEffect } from 'react'
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+import { translations, languages } from './i18n'
 
 const queryClient = new QueryClient()
-
-const translations = {
-  en: {
-    nav: { features: 'Features', comparison: 'Comparison', docs: 'Docs', github: 'GitHub' },
-    hero: { badge: 'Open Source', title: 'The Agent Operating System', subtitle: 'Production-Grade Autonomous AI Agents in Rust. 180ms cold start, 40MB memory, 16 security layers, 40 channel adapters.' },
-    stats: { coldStart: 'Cold Start', memory: 'Memory', security: 'Security Layers', channels: 'Channels' },
-    features: { title: 'Built-in Hands', subtitle: 'Seven autonomous capability units that work out of the box' },
-    workflows: { title: 'What can you build?', subtitle: 'Production-ready workflows for autonomous operations' },
-    comparison: { title: 'How we compare', subtitle: 'Librefang vs other agent frameworks' },
-    install: { title: 'Get Started', subtitle: 'Install Librefang and start building autonomous agents in minutes' },
-    faq: { title: 'FAQ' },
-    footer: { description: 'Librefang is a production-grade Agent Operating System built in Rust. Open source, privacy-focused, and built for 24/7 autonomous operation.' }
-  },
-  zh: {
-    nav: { features: '特性', comparison: '对比', docs: '文档', github: 'GitHub' },
-    hero: { badge: '开源', title: '代理操作系统', subtitle: 'Rust 构建的生产级自主 AI 代理。180ms 冷启动，40MB 内存，16 层安全，40 个渠道适配器。' },
-    stats: { coldStart: '冷启动', memory: '内存', security: '安全层', channels: '渠道' },
-    features: { title: '内置能力单元', subtitle: '开箱即用的七个自主能力单元' },
-    workflows: { title: '可以构建什么？', subtitle: '用于自主运行的生产就绪工作流' },
-    comparison: { title: '性能对比', subtitle: 'Librefang 与其他代理框架的对比' },
-    install: { title: '开始使用', subtitle: '安装 Librefang并在几分钟内开始构建自主代理' },
-    faq: { title: '常见问题' },
-    footer: { description: 'Librefang 是用 Rust 构建的生产级代理操作系统。开源、注重隐私，专为 24/7 自主运行而设计。' }
-  },
-  de: {
-    nav: { features: 'Funktionen', comparison: 'Vergleich', docs: 'Dokumentation', github: 'GitHub' },
-    hero: { badge: 'Open Source', title: 'Das Agenten-Betriebssystem', subtitle: 'Produktionsreifes Autonomes AI in Rust. 180ms Cold Start, 40MB Speicher, 16 Sicherheitsschichten, 40 Kanaladapter.' },
-    stats: { coldStart: 'Cold Start', memory: 'Speicher', security: 'Sicherheitsschichten', channels: 'Kanäle' },
-    features: { title: 'Integrierte Hands', subtitle: 'Sieben autonome Fähigkeiten, die sofort einsatzbereit sind' },
-    workflows: { title: 'Was können Sie bauen?', subtitle: 'Produktionsreife Workflows für autonomen Betrieb' },
-    comparison: { title: 'Vergleich', subtitle: 'Librefang vs. andere Agenten-Frameworks' },
-    install: { title: 'Loslegen', subtitle: 'Installieren Sie Librefang und bauen Sie in Minuten autonome Agenten' },
-    faq: { title: 'FAQ' },
-    footer: { description: 'Librefang ist ein produktionsreifes Agenten-Betriebssystem in Rust. Open Source, datenschutzorientiert und für 24/7 autonomen Betrieb konzipiert.' }
-  },
-  ja: {
-    nav: { features: '機能', comparison: '比較', docs: 'ドキュメント', github: 'GitHub' },
-    hero: { badge: 'オープンソース', title: 'エージェントオペレーティングシステム', subtitle: 'Rustで構築された本番対応自律型AI。180msコールドスタート、40MBメモリ、16層のセキュリティ、40のチャンネルアダプター。' },
-    stats: { coldStart: 'コールドスタート', memory: 'メモリ', security: 'セキュリティ層', channels: 'チャンネル' },
-    features: { title: '組み込みHands', subtitle: '箱から出してすぐに使える7つの自律的能力' },
-    workflows: { title: '何を作れますか？', subtitle: '自律運用に向けた本番対応ワークフロー' },
-    comparison: { title: '比較', subtitle: 'Librefangと他のエージェントフレームワーク' },
-    install: { title: '始める', subtitle: 'Librefangをインストールして数分で自律エージェントを構築' },
-    faq: { title: 'FAQ' },
-    footer: { description: 'LibrefangはRustで構築された本番対応エージェントオペレーティングシステムです。オープンソース、プライバシー重視、24時間365日自律運用向けに設計されています。' }
-  }
-}
-
-const languages = [
-  { code: 'en', name: 'English', url: '/' },
-  { code: 'zh', name: '简体中文', url: '/zh/' },
-  { code: 'de', name: 'Deutsch', url: '/de/' },
-  { code: 'ja', name: '日本語', url: '/ja/' },
-]
-
-function getCurrentLang() {
-  const path = window.location.pathname
-  if (path.startsWith('/zh')) return 'zh'
-  if (path.startsWith('/de')) return 'de'
-  if (path.startsWith('/ja')) return 'ja'
-  return 'en'
-}
-
-const t = translations[getCurrentLang()]
 
 const features = [
   { icon: 'movie_edit', title: 'Clip', description: 'Auto-converts YouTube videos into vertical shorts with AI captions and voice-over. Publishes directly to Telegram. Your content pipeline runs itself — no editors needed.' },
@@ -205,11 +142,11 @@ function Hero() {
             Librefang
           </h1>
           <p className="text-gray-400 text-xl md:text-2xl font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-            The production-grade Agent Operating System. Not a chatbot framework — a complete OS for AI agents that runs 24/7, autonomously, while you sleep.
+            {t.hero.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start pt-4">
             <a href="#install" className="bg-primary hover:bg-primary-dark text-white font-extrabold py-5 px-10 rounded-full shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95">
-              Get Started
+              {t.hero.getStarted}
             </a>
             <a href="https://github.com/RightNow-AI/librefang" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-white/5 text-gray-100 font-bold py-5 px-10 rounded-full border border-gray-600/50 backdrop-blur-md transition-all hover:scale-105 active:scale-95 flex items-center gap-2 justify-center">
               <svg fill="currentColor" height="20" width="20" viewBox="0 0 256 256">
