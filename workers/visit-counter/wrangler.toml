@@ -6,5 +6,9 @@ compatibility_date = "2024-01-01"
 binding = "VISIT_COUNTER"
 id = "3ddec4f5f8024982b1ccd49fa6b00e3b"
 
+# Schedule:每天 UTC 0点 (北京时间 8点) 执行一次记录star历史
+[triggers]
+crons = ["0 0 * * *"]
+
 # Uncomment and add your GitHub token for higher API rate limits
 # GITHUB_TOKEN = "your_github_token_here"

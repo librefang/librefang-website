@@ -1,171 +1,220 @@
 // Cloudflare Worker - Visit Counter (KV) + GitHub API Proxy
 
+/**
+ * Scheduled handler - runs daily via cron to record star history
+ */
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url)
-    const path = url.pathname
-    const method = request.method
+    return handleFetch(request, env)
+  },
 
-    const corsHeaders = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    }
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(recordDailyStars(env))
+  },
+}
 
-    if (method === 'OPTIONS') {
-      return new Response(null, { headers: corsHeaders })
-    }
+/**
+ * Record today's star count to KV for historical tracking
+ */
+async function recordDailyStars(env) {
+  const headers = {
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'LibrefangCounter/1.0',
+  }
 
-    // POST /api/track
-    if (path === '/api/track' && method === 'POST') {
-      try {
-        const text = await request.text()
-        let page = 'home'
-        try {
-          page = JSON.parse(text).page || 'home'
-        } catch (e) {}
+  if (env.GITHUB_TOKEN) {
+    headers['Authorization'] = `token ${env.GITHUB_TOKEN}`
+  }
 
-        const today = new Date().toISOString().split('T')[0]
-
-        let total = 0
-        let todayCount = 0
-        try {
-          total = parseInt(await env.VISIT_COUNTER.get('total') || '0', 10)
-        } catch (e) { total = 0 }
-
-        try {
-          todayCount = parseInt(await env.VISIT_COUNTER.get('today_' + today) || '0', 10)
-        } catch (e) { todayCount = 0 }
-
-        total = (total || 0) + 1
-        todayCount = (todayCount || 0) + 1
-
-        try {
-          await env.VISIT_COUNTER.put('total', String(total))
-          await env.VISIT_COUNTER.put('today_' + today, String(todayCount))
-        } catch (e) {
-          return new Response(JSON.stringify({ error: 'KV put failed: ' + e.message }), { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } })
-        }
-
-        return new Response(JSON.stringify({ success: true, total }), {
-          headers: { 'Content-Type': 'application/json', ...corsHeaders }
-        })
-      } catch (e) {
-        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } })
-      }
-    }
-
-    // GET /api/github - GitHub stats proxy
-    if (path === '/api/github' && method === 'GET') {
-      try {
-        const cacheKey = 'github_stats_cache_v7'
-        const cacheTimeKey = 'github_stats_time_v7'
-        const cacheDuration = 1000 * 60 * 30 // 30 minutes
-
-        let cachedData = null
-        let cacheTime = 0
-
-        try {
-          cachedData = await env.VISIT_COUNTER.get(cacheKey)
-          const cacheTimeStr = await env.VISIT_COUNTER.get(cacheTimeKey)
-          cacheTime = parseInt(cacheTimeStr || '0', 10)
-        } catch (e) {}
-
-        // Return cached data if still valid
-        if (cachedData && cacheTime && (Date.now() - cacheTime < cacheDuration)) {
-          return new Response(cachedData, {
-            headers: { 'Content-Type': 'application/json', ...corsHeaders }
-          })
-        }
-
-        // Fetch fresh data from GitHub
-        const fetchHeaders = {
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'LibrefangCounter/1.0',
-        }
-
-        if (env.GITHUB_TOKEN) {
-          fetchHeaders['Authorization'] = `token ${env.GITHUB_TOKEN}`
-        }
-
-        const [repoRes, releasesRes] = await Promise.all([
-          fetch('https://api.github.com/repos/librefang/librefang', { headers: fetchHeaders }),
-          fetch('https://api.github.com/repos/librefang/librefang/releases?per_page=10', { headers: fetchHeaders }),
-        ])
-
-        let repoJson = {}
-        let releasesData = []
-
-        try {
-          if (repoRes.ok) {
-            repoJson = await repoRes.json()
-          }
-        } catch (e) {
-          repoJson = { error: 'Failed to parse repo response' }
-        }
-
-        try {
-          if (releasesRes.ok) {
-            releasesData = await releasesRes.json()
-          }
-        } catch (e) {
-          releasesData = []
-        }
-
-        const totalDownloads = releasesData.reduce((sum, rel) => {
-          const assetDownloads = rel.assets?.reduce((s, a) => s + (a.download_count || 0), 0) || 0
-          return sum + assetDownloads
-        }, 0)
-
-        const result = {
-          stars: repoJson.stargazers_count || 0,
-          forks: repoJson.forks_count || 0,
-          issues: repoJson.open_issues_count || 0,
-          lastUpdate: repoJson.updated_at || '',
-          createdAt: repoJson.created_at || '',
-          downloads: totalDownloads,
-        }
-
-        const jsonStr = JSON.stringify(result)
-
-        // Cache the result
-        try {
-          await env.VISIT_COUNTER.put(cacheKey, jsonStr)
-          await env.VISIT_COUNTER.put(cacheTimeKey, String(Date.now()))
-        } catch (e) {
-          // Cache write failed
-        }
-
-        return new Response(jsonStr, {
-          headers: { 'Content-Type': 'application/json', ...corsHeaders }
-        })
-      } catch (e) {
-        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } })
-      }
-    }
-
-    // GET / or /api
-    if (path === '/' || path === '/api') {
+  try {
+    const res = await fetch('https://api.github.com/repos/librefang/librefang', { headers })
+    if (res.ok) {
+      const data = await res.json()
       const today = new Date().toISOString().split('T')[0]
-      let total = 0
-      let todayCount = 0
+      await env.VISIT_COUNTER.put('stars_' + today, String(data.stargazers_count || 0))
+      console.log('Recorded stars:', today, data.stargazers_count)
+    }
+  } catch (e) {
+    console.error('Failed to record stars:', e.message)
+  }
+}
 
-      try {
-        total = parseInt(await env.VISIT_COUNTER.get('total') || '0', 10)
-      } catch (e) { total = 0 }
+/**
+ * Main HTTP request handler
+ */
+function handleFetch(request, env) {
+  const url = new URL(request.url)
+  const path = url.pathname
+  const method = request.method
 
-      try {
-        todayCount = parseInt(await env.VISIT_COUNTER.get('today_' + today) || '0', 10)
-      } catch (e) { todayCount = 0 }
+  const cors = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  }
 
-      return new Response(JSON.stringify({ total: total || 0, today: todayCount || 0, date: today }), {
-        headers: { 'Content-Type': 'application/json', ...corsHeaders }
+  if (method === 'OPTIONS') {
+    return new Response(null, { headers: cors })
+  }
+
+  // POST /api/track - track page visit
+  if (path === '/api/track' && method === 'POST') {
+    return handleTrack(request, env, cors)
+  }
+
+  // GET /api/github - get GitHub stats with history
+  if (path === '/api/github' && method === 'GET') {
+    return handleGitHubStats(env, cors)
+  }
+
+  // GET /api - get visit counter
+  if (path === '/' || path === '/api') {
+    return handleVisits(env, cors)
+  }
+
+  // GET /script.js - tracking script
+  if (path === '/script.js') {
+    return handleScript(env, cors)
+  }
+
+  return new Response('Not Found', { status: 404 })
+}
+
+/**
+ * Handle visit tracking
+ */
+async function handleTrack(request, env, cors) {
+  try {
+    const text = await request.text()
+    let page = 'home'
+    try {
+      page = JSON.parse(text).page || 'home'
+    } catch (e) {}
+
+    const today = new Date().toISOString().split('T')[0]
+
+    let total = parseInt(await env.VISIT_COUNTER.get('total') || '0', 10) || 0
+    let todayCount = parseInt(await env.VISIT_COUNTER.get('today_' + today) || '0', 10) || 0
+
+    total++
+    todayCount++
+
+    await env.VISIT_COUNTER.put('total', String(total))
+    await env.VISIT_COUNTER.put('today_' + today, String(todayCount))
+
+    return new Response(JSON.stringify({ success: true, total }), {
+      headers: { 'Content-Type': 'application/json', ...cors }
+    })
+  } catch (e) {
+    return new Response(JSON.stringify({ error: e.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json', ...cors }
+    })
+  }
+}
+
+/**
+ * Handle GitHub stats API with caching and history
+ */
+async function handleGitHubStats(env, cors) {
+  const cacheKey = 'github_stats'
+  const cacheTimeKey = 'github_stats_time'
+  const cacheDuration = 1000 * 60 * 30 // 30 minutes
+
+  try {
+    // Check cache
+    const cached = await env.VISIT_COUNTER.get(cacheKey)
+    const cacheTime = parseInt(await env.VISIT_COUNTER.get(cacheTimeKey) || '0', 10)
+
+    if (cached && cacheTime && (Date.now() - cacheTime < cacheDuration)) {
+      return new Response(cached, {
+        headers: { 'Content-Type': 'application/json', ...cors }
       })
     }
 
-    // /script.js
-    if (path === '/script.js') {
-      const script = `(function() {
+    // Fetch from GitHub
+    const headers = {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'LibrefangCounter/1.0',
+    }
+
+    if (env.GITHUB_TOKEN) {
+      headers['Authorization'] = `token ${env.GITHUB_TOKEN}`
+    }
+
+    const [repoRes, releasesRes] = await Promise.all([
+      fetch('https://api.github.com/repos/librefang/librefang', { headers }),
+      fetch('https://api.github.com/repos/librefang/librefang/releases?per_page=10', { headers }),
+    ])
+
+    const repo = repoRes.ok ? await repoRes.json() : {}
+    const releases = releasesRes.ok ? await releasesRes.json() : []
+
+    const downloads = releases.reduce((sum, rel) => {
+      return sum + (rel.assets?.reduce((s, a) => s + (a.download_count || 0), 0) || 0)
+    }, 0)
+
+    // Record today's stars for history
+    const today = new Date().toISOString().split('T')[0]
+    await env.VISIT_COUNTER.put('stars_' + today, String(repo.stargazers_count || 0))
+
+    // Get last 30 days history
+    const history = []
+    for (let i = 0; i < 30; i++) {
+      const d = new Date()
+      d.setDate(d.getDate() - i)
+      const dateStr = d.toISOString().split('T')[0]
+      const stars = await env.VISIT_COUNTER.get('stars_' + dateStr)
+      if (stars) {
+        history.push({ date: dateStr, stars: parseInt(stars, 10) })
+      }
+    }
+
+    const result = {
+      stars: repo.stargazers_count || 0,
+      forks: repo.forks_count || 0,
+      issues: repo.open_issues_count || 0,
+      lastUpdate: repo.updated_at || '',
+      createdAt: repo.created_at || '',
+      downloads,
+      starHistory: history.reverse(),
+    }
+
+    const json = JSON.stringify(result)
+
+    // Cache
+    await env.VISIT_COUNTER.put(cacheKey, json)
+    await env.VISIT_COUNTER.put(cacheTimeKey, String(Date.now()))
+
+    return new Response(json, {
+      headers: { 'Content-Type': 'application/json', ...cors }
+    })
+  } catch (e) {
+    return new Response(JSON.stringify({ error: e.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json', ...cors }
+    })
+  }
+}
+
+/**
+ * Handle visit counter API
+ */
+async function handleVisits(env, cors) {
+  const today = new Date().toISOString().split('T')[0]
+  const total = parseInt(await env.VISIT_COUNTER.get('total') || '0', 10) || 0
+  const todayCount = parseInt(await env.VISIT_COUNTER.get('today_' + today) || '0', 10) || 0
+
+  return new Response(JSON.stringify({ total, today: todayCount, date: today }), {
+    headers: { 'Content-Type': 'application/json', ...cors }
+  })
+}
+
+/**
+ * Handle tracking script
+ */
+function handleScript(env, cors) {
+  const script = `(function() {
   var page = window.location.pathname || 'home';
   fetch('https://librefang-counter.suzukaze-haduki.workers.dev/api/track', {
     method: 'POST',
@@ -174,11 +223,8 @@ export default {
     keepalive: true
   }).catch(function() {});
 })();`
-      return new Response(script, {
-        headers: { 'Content-Type': 'application/javascript', ...corsHeaders }
-      })
-    }
 
-    return new Response('Not Found', { status: 404 })
-  }
+  return new Response(script, {
+    headers: { 'Content-Type': 'application/javascript', ...cors }
+  })
 }

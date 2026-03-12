@@ -525,35 +525,12 @@ function GitHubStats({ t }) {
   const issues = githubData?.issues ?? 0
   const downloads = githubData?.downloads ?? 0
   const lastUpdate = githubData?.lastUpdate ? new Date(githubData.lastUpdate).toLocaleDateString() : ''
-  const createdAt = githubData?.createdAt ? new Date(githubData.createdAt) : null
 
-  // Generate star history data based on repo age
-  const getStarHistory = () => {
-    if (!stars || stars === 0) return []
-
-    const now = new Date()
-    const created = createdAt || new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000) // Default to 30 days if no creation date
-    const daysSinceCreation = Math.max(1, Math.floor((now.getTime() - created.getTime()) / (1000 * 60 * 60 * 24)))
-
-    // Generate 12 data points
-    const history = []
-    for (let i = 11; i >= 0; i--) {
-      const daysAgo = i * 30 // Each bar represents ~1 month
-      const daysFromCreation = daysSinceCreation - daysAgo
-
-      if (daysFromCreation <= 0) {
-        history.push(0)
-      } else {
-        // Simulate growth: starts slow, accelerates
-        const progress = daysFromCreation / daysSinceCreation
-        const simulatedStars = Math.floor(stars * Math.pow(progress, 0.7))
-        history.push(Math.max(1, simulatedStars))
-      }
-    }
-    return history
-  }
-
-  const starHistory = getStarHistory()
+  // Use real star history from API, or generate if not available
+  const starHistoryData = githubData?.starHistory || []
+  const starHistory = starHistoryData.length > 0
+    ? starHistoryData.map(d => d.stars)
+    : (stars > 0 ? [stars] : [])
   const maxStars = Math.max(...starHistory, 1)
 
   return (
@@ -600,11 +577,15 @@ function GitHubStats({ t }) {
           </div>
           <div className="h-48 flex items-end gap-1 overflow-x-auto">
             {starHistory.length > 0 ? (
-              starHistory.map((monthStars, i) => (
-                <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t min-w-4" style={{ height: `${Math.max(5, (monthStars / maxStars) * 100)}%` }} title={`${monthStars} stars`}></div>
-              ))
+              Array.from({ length: 12 }, (_, i) => {
+                const idx = Math.floor((i / 12) * starHistory.length)
+                const monthStars = starHistory[idx] || 0
+                return (
+                  <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t min-w-4" style={{ height: `${Math.max(5, (monthStars / maxStars) * 100)}%` }} title={`${monthStars} stars`}></div>
+                )
+              })
             ) : (
-              <div className="w-full h-32 flex items-center justify-center text-gray-500">Loading...</div>
+              <div className="w-full h-32 flex items-center justify-center text-gray-500">No data yet</div>
             )}
           </div>
           <div className="flex justify-between mt-2 text-xs text-gray-500">
