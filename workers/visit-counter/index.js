@@ -1,6 +1,4 @@
-// Cloudflare Worker - Visit Counter (in-memory)
-
-const counters = { total: 0, today: {} }
+// Cloudflare Worker - Visit Counter (KV)
 
 export default {
   async fetch(request, env) {
@@ -20,29 +18,65 @@ export default {
 
     // POST /api/track
     if (path === '/api/track' && method === 'POST') {
-      const text = await request.text()
-      let page = 'home'
       try {
-        page = JSON.parse(text).page || 'home'
-      } catch (e) {}
+        const text = await request.text()
+        let page = 'home'
+        try {
+          page = JSON.parse(text).page || 'home'
+        } catch (e) {}
 
-      const today = new Date().toISOString().split('T')[0]
-      counters.total++
-      counters.today[today] = (counters.today[today] || 0) + 1
+        const today = new Date().toISOString().split('T')[0]
 
-      return new Response(JSON.stringify({ success: true, total: counters.total }), {
-        headers: { 'Content-Type': 'application/json' }
-      })
+        // Get current values
+        let total = 0
+        let todayCount = 0
+        try {
+          total = await env.VISIT_COUNTER.get('total') || '0'
+          total = parseInt(total, 10)
+        } catch (e) { total = 0 }
+
+        try {
+          todayCount = await env.VISIT_COUNTER.get('today_' + today) || '0'
+          todayCount = parseInt(todayCount, 10)
+        } catch (e) { todayCount = 0 }
+
+        // Increment
+        total = (total || 0) + 1
+        todayCount = (todayCount || 0) + 1
+
+        // Save
+        try {
+          await env.VISIT_COUNTER.put('total', String(total))
+          await env.VISIT_COUNTER.put('today_' + today, String(todayCount))
+        } catch (e) {
+          return new Response(JSON.stringify({ error: 'KV put failed: ' + e.message }), { status: 500, headers: { 'Content-Type': 'application/json' } })
+        }
+
+        return new Response(JSON.stringify({ success: true, total }), {
+          headers: { 'Content-Type': 'application/json' }
+        })
+      } catch (e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: { 'Content-Type': 'application/json' } })
+      }
     }
 
     // GET / or /api
     if (path === '/' || path === '/api') {
       const today = new Date().toISOString().split('T')[0]
-      return new Response(JSON.stringify({
-        total: counters.total,
-        today: counters.today[today] || 0,
-        date: today
-      }), {
+      let total = 0
+      let todayCount = 0
+
+      try {
+        total = await env.VISIT_COUNTER.get('total') || '0'
+        total = parseInt(total, 10)
+      } catch (e) { total = 0 }
+
+      try {
+        todayCount = await env.VISIT_COUNTER.get('today_' + today) || '0'
+        todayCount = parseInt(todayCount, 10)
+      } catch (e) { todayCount = 0 }
+
+      return new Response(JSON.stringify({ total: total || 0, today: todayCount || 0, date: today }), {
         headers: { 'Content-Type': 'application/json' }
       })
     }

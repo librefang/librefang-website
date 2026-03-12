@@ -2,4 +2,6 @@ name = "librefang-counter"
 main = "index.js"
 compatibility_date = "2024-01-01"
 
-# KV removed - using in-memory counter
+[[kv_namespaces]]
+binding = "VISIT_COUNTER"
+id = "3ddec4f5f8024982b1ccd49fa6b00e3b"
