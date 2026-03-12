@@ -35,6 +35,12 @@ function MaterialIcon({ name, className = '' }) {
   return <span className={`material-symbols-outlined ${className}`}>{name}</span>
 }
 
+function Skeleton({ className = '' }) {
+  return (
+    <div className={`animate-pulse bg-gray-700 rounded ${className}`}></div>
+  )
+}
+
 function Header({ t }) {
   const currentLangName = languages.find(l => {
     const path = window.location.pathname
@@ -129,7 +135,7 @@ function Hero({ t }) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            {isLoading ? 'Loading...' : version} · Rust-Powered · Open Source
+            {isLoading ? <Skeleton className="w-20 h-5 inline-block" /> : version} · Rust-Powered · Open Source
           </div>
           <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-primary">
             Librefang
