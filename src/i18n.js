@@ -30,7 +30,7 @@ export const translations = {
       { question: 'Which LLM providers are supported?', answer: 'Librefang supports 12 mainstream LLM providers including Anthropic, OpenAI, Gemini, Groq, DeepSeek, Mistral, Together, Ollama, vLLM, and more — covering 123+ models total. All providers require API keys; OAuth is not currently supported. Each Hand can be configured to use a different provider.' },
       { question: 'Which channels are supported?', answer: 'Librefang supports 40 channel adapters — the broadest coverage of any agent framework. This includes Telegram, Discord, Slack, WhatsApp, Signal, Matrix, Teams, Google Chat, Feishu, DingTalk, Mastodon, Bluesky, LinkedIn, Reddit, IRC, and 24+ more. If your team uses it, Librefang probably connects to it.' },
       { question: 'Is it production-ready?', answer: 'Librefang v0.1.0 passes 1,767+ tests with zero Clippy warnings. It has 16 discrete security layers including WASM sandboxing, Merkle hash-chain audit trail, and SSRF protection. Breaking API changes are possible until v1.0, so pin your version in production. The core runtime is stable and used in production deployments today.' },
-      { question: 'Where is the GitHub repository?', answer: 'Find Librefang on GitHub: github.com/RightNow-AI/librefang. Star the project to follow releases and feature updates.' },
+      { question: 'Where is the GitHub repository?', answer: 'Find Librefang on GitHub: github.com/librefang/librefang. Star the project to follow releases and feature updates.' },
     ]},
     footer: { description: 'Librefang is a production-grade Agent Operating System built in Rust. Open source, privacy-focused, and built for 24/7 autonomous operation.', privacy: 'Privacy', license: 'License', project: 'Project', community: 'Community', issues: 'Issues', discussions: 'Discussions', docs: 'Docs', quickStart: 'Quick Start', agentOS: 'Agent Operating System', agentOSDesc: 'Production-grade, Rust-powered.' }
   },
@@ -65,7 +65,7 @@ export const translations = {
       { question: '支持哪些 LLM 提供商？', answer: 'Librefang 支持 12 个主流 LLM 提供商，包括 Anthropic、OpenAI、Gemini、Groq、DeepSeek、Mistral、Together、Ollama、vLLM 等——共计 123+ 型号。所有提供商都需要 API 密钥；暂不支持 OAuth。每个 Hand 都可以配置使用不同的提供商。' },
       { question: '支持哪些渠道？', answer: 'Librefang 支持 40 个渠道适配器——这是所有代理框架中最广泛的覆盖。包括 Telegram、Discord、Slack、WhatsApp、Signal、Matrix、Teams、Google Chat、飞书、钉钉、Mastodon、Bluesky、LinkedIn、Reddit、IRC 等 24+ 个。如果你的团队使用它，Librefang 很可能能连接。' },
       { question: '可以用于生产环境了吗？', answer: 'Librefang v0.1.0 通过了 1,767+ 测试，零 Clippy 警告。它有 16 层独立安全包括 WASM 沙箱、Merkle 哈希链审计跟踪和 SSRF 防护。在 v1.0 之前可能会有破坏性 API 变化，因此在生产环境中请锁定版本。核心运行时稳定，已在生产部署中使用。' },
-      { question: 'GitHub 仓库在哪里？', answer: '在 GitHub 上找到 Librefang：github.com/RightNow-AI/librefang。给项目加星标以关注版本更新。' },
+      { question: 'GitHub 仓库在哪里？', answer: '在 GitHub 上找到 Librefang：github.com/librefang/librefang。给项目加星标以关注版本更新。' },
     ]},
     footer: { description: 'Librefang 是用 Rust 构建的生产级代理操作系统。开源、注重隐私，专为 24/7 自主运行而设计。', privacy: '隐私', license: '许可证', project: '项目', community: '社区', issues: '问题', discussions: '讨论', docs: '文档', quickStart: '快速开始', agentOS: '代理操作系统', agentOSDesc: '生产级，Rust 驱动。' }
   },
@@ -100,7 +100,7 @@ export const translations = {
       { question: 'Welche LLM-Anbieter werden unterstützt?', answer: 'Librefang unterstützt 12 Haupt-LLM-Anbieter, darunter Anthropic, OpenAI, Gemini, Groq, DeepSeek, Mistral, Together, Ollama, vLLM und mehr — insgesamt über 123 Modelle. Alle Anbieter erforder API-Schlüssel; OAuth wird derzeit nicht unterstützt. Jede Hand kann für einen anderen Anbieter konfiguriert werden.' },
       { question: 'Welche Kanäle werden unterstützt?', answer: 'Librefang unterstützt 40 Kanaladapter — die breiteste Abdeckung aller Agenten-Frameworks. Dies umfasst Telegram, Discord, Slack, WhatsApp, Signal, Matrix, Teams, Google Chat, Feishu, DingTalk, Mastodon, Bluesky, LinkedIn, Reddit, IRC und mehr als 24 weitere. Wenn Ihr Team es nutzt, verbindet sich Librefang wahrscheinlich damit.' },
       { question: 'Ist es produktionsreif?', answer: 'Librefang v0.1.0 besteht 1.767+ Tests mit null Clippy-Warnungen. Es hat 16 diskrete Sicherheitsschichten, einschließlich WASM-Sandbox, Merkle-Hash-Chain-Audit-Trail und SSRF-Schutz. Brechende API-Änderungen sind bis v1.0 möglich, also pinnen Sie Ihre Version in der Produktion. Die Core-Runtime ist stabil und wird heute in Produktionsumgebungen verwendet.' },
-      { question: 'Wo ist das GitHub-Repository?', answer: 'Finden Sie Librefang auf GitHub: github.com/RightNow-AI/librefang. Sternen Sie das Projekt, um Versions- und Feature-Updates zu folgen.' },
+      { question: 'Wo ist das GitHub-Repository?', answer: 'Finden Sie Librefang auf GitHub: github.com/librefang/librefang. Sternen Sie das Projekt, um Versions- und Feature-Updates zu folgen.' },
     ]},
     footer: { description: 'Librefang ist ein produktionsreifes Agenten-Betriebssystem in Rust. Open Source, datenschutzorientiert und für 24/7 autonomen Betrieb konzipiert.', privacy: 'Datenschutz', license: 'Lizenz', project: 'Projekt', community: 'Community', issues: 'Probleme', discussions: 'Diskussionen', docs: 'Dokumentation', quickStart: 'Schnellstart', agentOS: 'Agenten-Betriebssystem', agentOSDesc: 'Produktionsreif, Rust-basiert.' }
   },
@@ -135,7 +135,7 @@ export const translations = {
       { question: 'どのLLMプロバイダーがサポートされていますか？', answer: 'Librefangは12の主流LLMプロバイダーをサポートしています——Anthropic、OpenAI、Gemini、Groq、DeepSeek、Mistral、Together、Ollama、vLLMなど——合計123+モデル。全プロバイダーはAPIキーを必要とします；OAuthは現在サポートされていません。各Handは異なるプロバイダを使用するように設定できます。' },
       { question: '哪些渠道支持？', answer: 'Librefangは40のチャンネルアダプターをサポートしています——すべての最も広いエージェントフレームワークの中でカバレッジ。これにはTelegram、Discord、Slack、WhatsApp、Signal、Matrix、Teams、Google Chat、飛書、DingTalk、Mastodon、Bluesky、LinkedIn、Reddit、IRCなどが含まれます24以上。你的团队用它，Librefang很可能可以连接。' },
       { question: '本番対応ですか？', answer: 'Librefang v0.1.0は1,767以上のテストを合格し、Clippy警告ゼロです。WASMサンドボックス、Merkleハッシュチェーン監査トレイル、SSRF保護を含む16の離散的なセキュリティレイヤーがあります。v1.0まで破壊的API変更の可能性があるので、本番ではバージョンをピン留めしてください。コアルタイムタイムは安定しており、現代の本番展開で使用されています。' },
-      { question: 'GitHubリポジトリはどこですか？', answer: 'GitHubでLibrefangを見つける：github.com/RightNow-AI/librefang。リリースと機能更新をフォローするためにプロジェクトにスターを付けてください。' },
+      { question: 'GitHubリポジトリはどこですか？', answer: 'GitHubでLibrefangを見つける：github.com/librefang/librefang。リリースと機能更新をフォローするためにプロジェクトにスターを付けてください。' },
     ]},
     footer: { description: 'LibrefangはRustで構築された本番対応エージェントオペレーティングシステムです。オープンソース、プライバシー重視、24時間365日自律運用向けに設計されています。', privacy: 'プライバシー', license: 'ライセンス', project: 'プロジェクト', community: 'コミュニティ', issues: '問題', discussions: 'ディスカッション', docs: 'ドキュメント', quickStart: 'クイックスタート', agentOS: 'エージェントオペレーティングシステム', agentOSDesc: '本番対応、Rust駆動。' }
   }
