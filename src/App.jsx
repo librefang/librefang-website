@@ -627,16 +627,14 @@ function App() {
 
   useEffect(() => {
     const path = window.location.pathname
-    let detectedLang = lang
+    let detectedLang = 'en'
     if (path.startsWith('/zh-TW')) detectedLang = 'zh-TW'
     else if (path.startsWith('/zh')) detectedLang = 'zh'
     else if (path.startsWith('/de')) detectedLang = 'de'
     else if (path.startsWith('/ja')) detectedLang = 'ja'
     else if (path.startsWith('/ko')) detectedLang = 'ko'
     else if (path.startsWith('/es')) detectedLang = 'es'
-    if (detectedLang !== lang) {
-      setLang(detectedLang)
-    }
+    setLang(detectedLang)
     document.documentElement.lang = detectedLang
   }, [])
 
