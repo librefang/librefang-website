@@ -137,7 +137,8 @@ function Hero({ t }) {
             </span>
             {isLoading ? <Skeleton className="w-20 h-5 inline-block" /> : version} · Rust-Powered · Open Source
           </div>
-          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-primary">
+          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-primary flex items-center justify-center lg:justify-start gap-4">
+            <img src="/fox-mascot.png" alt="Librefang Mascot" className="w-16 h-16 md:w-20 md:h-20 rounded-xl" />
             Librefang
           </h1>
           <p className="text-gray-400 text-xl md:text-2xl font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
