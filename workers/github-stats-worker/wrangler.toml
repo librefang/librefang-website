@@ -6,6 +6,6 @@ compatibility_date = "2024-01-01"
 binding = "KV"
 id = "5d12c668469a4dd39f3b2b378cc20036"
 
-# 每天 UTC 0点执行，记录star历史
+# 每天 UTC 0点执行
 [triggers]
 crons = ["0 0 * * *"]
