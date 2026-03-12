@@ -532,16 +532,16 @@ function GitHubStats({ t }) {
   const starHistoryData = githubData?.starHistory || []
   const starHistory = starHistoryData.length > 0
     ? starHistoryData.map(d => d.stars)
-    : (stars > 0 ? [stars] : [])
+    : (stars > 0 ? [stars] : [0])
   const forksHistory = starHistoryData.length > 0
     ? starHistoryData.map(d => d.forks)
-    : (forks > 0 ? [forks] : [])
+    : (forks > 0 ? [forks] : [0])
   const issuesHistory = starHistoryData.length > 0
     ? starHistoryData.map(d => d.issues)
-    : (issues > 0 ? [issues] : [])
+    : (issues > 0 ? [issues] : [0])
   const prsHistory = starHistoryData.length > 0
-    ? starHistoryData.map(d => d.prs)
-    : (prs > 0 ? [prs] : [])
+    ? starHistoryData.map(d => d.prs ?? 0)
+    : (prs > 0 ? [prs] : [0])
 
   const [historyTab, setHistoryTab] = useState('stars')
   const currentHistory = historyTab === 'stars' ? starHistory : historyTab === 'forks' ? forksHistory : historyTab === 'issues' ? issuesHistory : prsHistory
