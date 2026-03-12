@@ -78,7 +78,7 @@ function Header({ t }) {
         <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-400">
           <a className="hover:text-primary transition-colors" href="#features">{t.nav.features}</a>
           <a className="hover:text-primary transition-colors" href="#comparison">{t.nav.comparison}</a>
-          <a className="hover:text-primary transition-colors" href="#install">{t.nav.docs}</a>
+          <a className="hover:text-primary transition-colors" href="https://docs.librefang.ai" target="_blank" rel="noopener noreferrer">{t.nav.docs}</a>
           <a className="flex items-center gap-1 hover:text-primary transition-colors" href="https://github.com/librefang/librefang" target="_blank" rel="noopener noreferrer">
             <span>{t.nav.github}</span>
             <MaterialIcon name="open_in_new" className="text-sm" />
