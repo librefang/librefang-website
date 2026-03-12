@@ -78,7 +78,10 @@ function Header({ t }) {
         <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-400">
           <a className="hover:text-primary transition-colors" href="#features">{t.nav.features}</a>
           <a className="hover:text-primary transition-colors" href="#comparison">{t.nav.comparison}</a>
-          <a className="hover:text-primary transition-colors" href="https://docs.librefang.ai" target="_blank" rel="noopener noreferrer">{t.nav.docs}</a>
+          <a className="flex items-center gap-1 hover:text-primary transition-colors" href="https://docs.librefang.ai" target="_blank" rel="noopener noreferrer">
+            <span>{t.nav.docs}</span>
+            <MaterialIcon name="open_in_new" className="text-sm" />
+          </a>
           <a className="flex items-center gap-1 hover:text-primary transition-colors" href="https://github.com/librefang/librefang" target="_blank" rel="noopener noreferrer">
             <span>{t.nav.github}</span>
             <MaterialIcon name="open_in_new" className="text-sm" />
@@ -522,49 +525,6 @@ function GitHubStats({ t }) {
   )
 }
 
-function DocsNav({ t }) {
-  const docLinks = [
-    { title: t.docs?.overview || 'Overview', desc: t.docs?.overviewDesc || '', url: 'https://docs.librefang.ai/docs/overview', icon: 'menu_book' },
-    { title: t.docs?.yldm || 'YLDM TEAM', desc: t.docs?.yldmDesc || '', url: 'https://docs.librefang.ai/docs/yldm-team', icon: 'groups' },
-    { title: t.docs?.automation || 'Automation', desc: t.docs?.automationDesc || '', url: 'https://docs.librefang.ai/docs/automation', icon: 'settings_suggest' },
-    { title: t.docs?.infrastructure || 'Infrastructure', desc: t.docs?.infrastructureDesc || '', url: 'https://docs.librefang.ai/docs/infrastructure', icon: 'dns' },
-    { title: t.docs?.workspace || 'Workspace', desc: t.docs?.workspaceDesc || '', url: 'https://docs.librefang.ai/docs/workspace', icon: 'folder' },
-    { title: t.docs?.operations || 'Operations', desc: t.docs?.operationsDesc || '', url: 'https://docs.librefang.ai/docs/operations', icon: 'build' },
-  ]
-
-  return (
-    <section className="px-6 py-20 border-t border-gray-700/50 bg-black/20">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-white">
-          {t.docs?.title || 'Documentation'}
-        </h2>
-        <p className="text-gray-400 text-center text-xl mb-16 max-w-2xl mx-auto">
-          {t.docs?.subtitle || 'Comprehensive guides for Librefang'}
-        </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {docLinks.map((link, i) => (
-            <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="p-6 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 hover:bg-white/10 transition-all group">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                  <MaterialIcon name={link.icon} className="text-2xl text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">{link.title}</h3>
-              </div>
-              <p className="text-gray-400 text-sm">{link.desc}</p>
-            </a>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <a href="https://docs.librefang.ai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-primary/20 hover:bg-primary/30 text-primary font-bold py-3 px-8 rounded-full border border-primary/50 transition-all hover:scale-105">
-            {t.docs?.viewAll || 'View All Docs'}
-            <MaterialIcon name="arrow_forward" />
-          </a>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function Contributing({ t }) {
   return (
     <section className="px-6 py-20 border-t border-gray-700/50 bg-gradient-to-b from-transparent to-primary/5">
@@ -702,7 +662,6 @@ function App() {
       </main>
       <GitHubStats t={currentT} />
       <Contributing t={currentT} />
-      <DocsNav t={currentT} />
       <Footer t={currentT} />
     </div>
   )
