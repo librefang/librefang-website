@@ -32,7 +32,9 @@ export const translations = {
       { question: 'Is it production-ready?', answer: 'Librefang v0.1.0 passes 1,767+ tests with zero Clippy warnings. It has 16 discrete security layers including WASM sandboxing, Merkle hash-chain audit trail, and SSRF protection. Breaking API changes are possible until v1.0, so pin your version in production. The core runtime is stable and used in production deployments today.' },
       { question: 'Where is the GitHub repository?', answer: 'Find Librefang on GitHub: github.com/librefang/librefang. Star the project to follow releases and feature updates.' },
     ]},
-    footer: { description: 'Librefang is a production-grade Agent Operating System built in Rust. Open source, privacy-focused, and built for 24/7 autonomous operation.', privacy: 'Privacy', license: 'License', project: 'Project', community: 'Community', issues: 'Issues', discussions: 'Discussions', docs: 'Docs', quickStart: 'Quick Start', agentOS: 'Agent Operating System', agentOSDesc: 'Production-grade, Rust-powered.' }
+    footer: { description: 'Librefang is a production-grade Agent Operating System built in Rust. Open source, privacy-focused, and built for 24/7 autonomous operation.', privacy: 'Privacy', license: 'License', project: 'Project', community: 'Community', issues: 'Issues', discussions: 'Discussions', docs: 'Docs', quickStart: 'Quick Start', agentOS: 'Agent Operating System', agentOSDesc: 'Production-grade, Rust-powered.' },
+    githubStats: { title: 'Join Our Community', subtitle: 'Help us build the future of autonomous AI agents', stars: 'Stars', forks: 'Forks', issues: 'Issues', lastUpdate: 'Last Update', starUs: 'Star Us', discuss: 'Discuss' },
+    contributing: { title: 'Contributing', subtitle: 'Help build the future of autonomous AI', code: 'Code', codeDesc: 'Contribute features, fix bugs, or improve documentation', submitPR: 'Submit PR', report: 'Report Bugs', reportDesc: 'Found an issue? Help us improve by reporting it', openIssue: 'Open Issue', community: 'Community', communityDesc: 'Join discussions and help other users', joinDiscuss: 'Join Discussion' }
   },
   zh: {
     nav: { features: '特性', comparison: '对比', docs: '文档', github: 'GitHub' },
@@ -67,7 +69,9 @@ export const translations = {
       { question: '可以用于生产环境了吗？', answer: 'Librefang v0.1.0 通过了 1,767+ 测试，零 Clippy 警告。它有 16 层独立安全包括 WASM 沙箱、Merkle 哈希链审计跟踪和 SSRF 防护。在 v1.0 之前可能会有破坏性 API 变化，因此在生产环境中请锁定版本。核心运行时稳定，已在生产部署中使用。' },
       { question: 'GitHub 仓库在哪里？', answer: '在 GitHub 上找到 Librefang：github.com/librefang/librefang。给项目加星标以关注版本更新。' },
     ]},
-    footer: { description: 'Librefang 是用 Rust 构建的生产级代理操作系统。开源、注重隐私，专为 24/7 自主运行而设计。', privacy: '隐私', license: '许可证', project: '项目', community: '社区', issues: '问题', discussions: '讨论', docs: '文档', quickStart: '快速开始', agentOS: '代理操作系统', agentOSDesc: '生产级，Rust 驱动。' }
+    footer: { description: 'Librefang 是用 Rust 构建的生产级代理操作系统。开源、注重隐私，专为 24/7 自主运行而设计。', privacy: '隐私', license: '许可证', project: '项目', community: '社区', issues: '问题', discussions: '讨论', docs: '文档', quickStart: '快速开始', agentOS: '代理操作系统', agentOSDesc: '生产级，Rust 驱动。' },
+    githubStats: { title: '加入我们的社区', subtitle: '帮助我们构建自主 AI 的未来', stars: '星标', forks: '分支', issues: '问题', lastUpdate: '最后更新', starUs: '给我们星标', discuss: '讨论' },
+    contributing: { title: '贡献代码', subtitle: '帮助构建自主 AI 的未来', code: '代码', codeDesc: '贡献功能、修复 bug 或完善文档', submitPR: '提交 PR', report: '报告问题', reportDesc: '发现问题？帮助我们改进', openIssue: '提 issue', community: '社区', communityDesc: '加入讨论并帮助其他用户', joinDiscuss: '加入讨论' }
   },
   de: {
     nav: { features: 'Funktionen', comparison: 'Vergleich', docs: 'Dokumentation', github: 'GitHub' },
@@ -102,7 +106,9 @@ export const translations = {
       { question: 'Ist es produktionsreif?', answer: 'Librefang v0.1.0 besteht 1.767+ Tests mit null Clippy-Warnungen. Es hat 16 diskrete Sicherheitsschichten, einschließlich WASM-Sandbox, Merkle-Hash-Chain-Audit-Trail und SSRF-Schutz. Brechende API-Änderungen sind bis v1.0 möglich, also pinnen Sie Ihre Version in der Produktion. Die Core-Runtime ist stabil und wird heute in Produktionsumgebungen verwendet.' },
       { question: 'Wo ist das GitHub-Repository?', answer: 'Finden Sie Librefang auf GitHub: github.com/librefang/librefang. Sternen Sie das Projekt, um Versions- und Feature-Updates zu folgen.' },
     ]},
-    footer: { description: 'Librefang ist ein produktionsreifes Agenten-Betriebssystem in Rust. Open Source, datenschutzorientiert und für 24/7 autonomen Betrieb konzipiert.', privacy: 'Datenschutz', license: 'Lizenz', project: 'Projekt', community: 'Community', issues: 'Probleme', discussions: 'Diskussionen', docs: 'Dokumentation', quickStart: 'Schnellstart', agentOS: 'Agenten-Betriebssystem', agentOSDesc: 'Produktionsreif, Rust-basiert.' }
+    footer: { description: 'Librefang ist ein produktionsreifes Agenten-Betriebssystem in Rust. Open Source, datenschutzorientiert und für 24/7 autonomen Betrieb konzipiert.', privacy: 'Datenschutz', license: 'Lizenz', project: 'Projekt', community: 'Community', issues: 'Probleme', discussions: 'Diskussionen', docs: 'Dokumentation', quickStart: 'Schnellstart', agentOS: 'Agenten-Betriebssystem', agentOSDesc: 'Produktionsreif, Rust-basiert.' },
+    githubStats: { title: 'Trete unserer Community bei', subtitle: 'Hilf uns, die Zukunft autonomer KI-Agenten zu bauen', stars: 'Sterne', forks: 'Forks', issues: 'Issues', lastUpdate: 'Letzte Aktualisierung', starUs: 'Stern geben', discuss: 'Diskutieren' },
+    contributing: { title: 'Mitmachen', subtitle: 'Hilf die Zukunft autonomer KI zu bauen', code: 'Code', codeDesc: 'Features beisteuern, Bugs beheben oder Dokumentation verbessern', submitPR: 'PR einreichen', report: 'Bugs melden', reportDesc: 'Ein Problem gefunden? Hilf uns es zu verbessern', openIssue: 'Issue öffnen', community: 'Community', communityDesc: 'Diskutiere und hilf anderen Nutzern', joinDiscuss: 'Diskussion beitreten' }
   },
   ja: {
     nav: { features: '機能', comparison: '比較', docs: 'ドキュメント', github: 'GitHub' },
@@ -137,7 +143,9 @@ export const translations = {
       { question: '本番対応ですか？', answer: 'Librefang v0.1.0は1,767以上のテストを合格し、Clippy警告ゼロです。WASMサンドボックス、Merkleハッシュチェーン監査トレイル、SSRF保護を含む16の離散的なセキュリティレイヤーがあります。v1.0まで破壊的API変更の可能性があるので、本番ではバージョンをピン留めしてください。コアルタイムタイムは安定しており、現代の本番展開で使用されています。' },
       { question: 'GitHubリポジトリはどこですか？', answer: 'GitHubでLibrefangを見つける：github.com/librefang/librefang。リリースと機能更新をフォローするためにプロジェクトにスターを付けてください。' },
     ]},
-    footer: { description: 'LibrefangはRustで構築された本番対応エージェントオペレーティングシステムです。オープンソース、プライバシー重視、24時間365日自律運用向けに設計されています。', privacy: 'プライバシー', license: 'ライセンス', project: 'プロジェクト', community: 'コミュニティ', issues: '問題', discussions: 'ディスカッション', docs: 'ドキュメント', quickStart: 'クイックスタート', agentOS: 'エージェントオペレーティングシステム', agentOSDesc: '本番対応、Rust駆動。' }
+    footer: { description: 'LibrefangはRustで構築された本番対応エージェントオペレーティングシステムです。オープンソース、プライバシー重視、24時間365日自律運用向けに設計されています。', privacy: 'プライバシー', license: 'ライセンス', project: 'プロジェクト', community: 'コミュニティ', issues: '問題', discussions: 'ディスカッション', docs: 'ドキュメント', quickStart: 'クイックスタート', agentOS: 'エージェントオペレーティングシステム', agentOSDesc: '本番対応、Rust駆動。' },
+    githubStats: { title: 'コミュニティに参加', subtitle: '自律型AIエージェントの未来を築くご協力をお願いします', stars: 'スター', forks: 'フォーク', issues: 'イシュー', lastUpdate: '最終更新', starUs: 'スターを付ける', discuss: '議論' },
+    contributing: { title: 'コントリビューション', subtitle: '自律型AIの未来を築く', code: 'コード', codeDesc: '機能追加、バグ修正、ドキュメント改善', submitPR: 'PR提交', report: 'バグ報告', reportDesc: '問題を発見しましたか？報告して改善に協力', openIssue: 'Issueを開く', community: 'コミュニティ', communityDesc: '議論に参加して他のユーザーを助ける', joinDiscuss: '議論に参加' }
   },
   ko: {
     nav: { features: '기능', comparison: '비교', docs: '문서', github: 'GitHub' },
@@ -172,7 +180,11 @@ export const translations = {
       { question: '프로덕션 준비가 되나요?', answer: 'Librefang v0.1.0은 1,767개 이상의 테스트를 통과하고 Clippy 경고为零입니다. WASM 샌드박스, Merkle 해시 체인 감사 추적, SSRF 보호를 포함한 16개의 개별 보안 레이어가 있습니다. v1.0까지 주요 API 변경이 있을 수 있으므로 프로덕션에서 버전을 고정하세요. 코어 런타임은 안정적이며 현재 프로덕션 배포에서 사용되고 있습니다.' },
       { question: 'GitHub 저장소는 어디인가요?', answer: 'GitHub에서 Librefang 찾기: github.com/librefang/librefang. 릴리스 및 기능 업데이트를 팔로우하려면 프로젝트에 스타를 눌러주세요.' },
     ]},
-    footer: { description: 'Librefang은 Rust로 구축된 프로덕션 등급 에이전트 운영체제입니다. 오픈소스, 프라이버시 중시, 24/7 자율 운영을 위해 설계되었습니다.', privacy: '프라이버시', license: '라이선스', project: '프로젝트', community: '커뮤니티', issues: '이슈', discussions: '토론', docs: '문서', quickStart: '빠른 시작', agentOS: '에이전트 운영체제', agentOSDesc: '프로덕션 등급, Rust 기반.' }
+    footer: { description: 'Librefang은 Rust로 구축된 프로덕션 등급 에이전트 운영체제입니다. 오픈소스, 프라이버시 중시, 24/7 자율 운영을 위해 설계되었습니다.', privacy: '프라이버시', license: '라이선스', project: '프로젝트', community: '커뮤니티', issues: '이슈', discussions: '토론', docs: '문서', quickStart: '빠른 시작', agentOS: '에이전트 운영체제', agentOSDesc: '프로덕션 등급, Rust 기반.' },
+    githubStats: { title: '커뮤니티에 참여하세요', subtitle: '자율 AI 에이전트의 미래를 구축하는 것을 도와주세요', stars: '스타', forks: '포크', issues: '이슈', lastUpdate: '마지막 업데이트', starUs: '스타 주기', discuss: '논의하기' },
+    contributing: { title: '기여하기', subtitle: '자율 AI의 미래를 구축하는 것을 도와주세요', code: '코드', codeDesc: '기능 추가, 버그 수정, 문서 개선에 기여하세요', submitPR: 'PR 제출', report: '버그 신고', reportDesc: '문제를 발견했나요? 신고하여 개선에 참여하세요', openIssue: '이슈 열기', community: '커뮤니티', communityDesc: '토론에 참여하고 다른 사용자를 도와주세요', joinDiscuss: '토론 참여' }
+  },
+  'zh-TW': {
   },
   'zh-TW': {
     nav: { features: '功能', comparison: '比較', docs: '文檔', github: 'GitHub' },
@@ -207,7 +219,9 @@ export const translations = {
       { question: '可以用於生產環境了嗎？', answer: 'Librefang v0.10 通過了 1,767+ 測試，零 Clippy 警告。它有 16 層獨立安全包括 WASM 沙箱、Merkle 哈希鏈審計追蹤和 SSRF 防護。在 v1.0 之前可能會有破壞性 API 變化，因此在生產環境中請鎖定版本。核心運行時穩定，已在生產部署中使用。' },
       { question: 'GitHub 倉庫在哪裡？', answer: '在 GitHub 上找到 Librefang：github.com/librefang/librefang。給專案加星標以關注版本更新。' },
     ]},
-    footer: { description: 'Librefang 是用 Rust 構建的生產級代理操作系統。開源、注重隱私，專為 24/7 自主運行而設計。', privacy: '隱私', license: '許可證', project: '專案', community: '社區', issues: '問題', discussions: '討論', docs: '文檔', quickStart: '快速開始', agentOS: '代理操作系統', agentOSDesc: '生產級，Rust 驅動。' }
+    footer: { description: 'Librefang 是用 Rust 構建的生產級代理操作系統。開源、注重隱私，專為 24/7 自主運行而設計。', privacy: '隱私', license: '許可證', project: '專案', community: '社區', issues: '問題', discussions: '討論', docs: '文檔', quickStart: '快速開始', agentOS: '代理操作系統', agentOSDesc: '生產級，Rust 驅動。' },
+    githubStats: { title: '加入我們的社群', subtitle: '幫助我們構建自主 AI 的未來', stars: '星標', forks: '分支', issues: '問題', lastUpdate: '最後更新', starUs: '給我們星標', discuss: '討論' },
+    contributing: { title: '貢獻', subtitle: '幫助構建自主 AI 的未來', code: '程式碼', codeDesc: '貢獻功能、修復問題或改善文檔', submitPR: '提交 PR', report: '回報問題', reportDesc: '發現問題？幫助我們改進', openIssue: '開啟問題', community: '社群', communityDesc: '加入討論並幫助其他使用者', joinDiscuss: '參與討論' }
   },
   es: {
     nav: { features: 'Características', comparison: 'Comparación', docs: 'Docs', github: 'GitHub' },
@@ -242,7 +256,9 @@ export const translations = {
       { question: '¿Está listo para producción?', answer: 'Librefang v0.1.0 pasa 1,767+ pruebas con cero advertencias de Clippy. Tiene 16 capas de seguridad discretas incluyendo sandboxing WASM, trail de auditoría con cadena hash Merkle y protección SSRF. Son posibles cambios de API rompientes hasta v1.0, así que fija tu versión en producción. El runtime central es estable y se usa en despliegues de producción hoy.' },
       { question: '¿Dónde está el repositorio de GitHub?', answer: 'Encuentra Librefang en GitHub: github.com/librefang/librefang. Dale una estrella al proyecto para seguir lanzamientos y actualizaciones.' },
     ]},
-    footer: { description: 'Librefang es un Sistema Operativo de Agentes de grado de producción construido en Rust. Código abierto, enfocado en privacidad y diseñado para operación autónoma 24/7.', privacy: 'Privacidad', license: 'Licencia', project: 'Proyecto', community: 'Comunidad', issues: 'Issues', discussions: 'Discusiones', docs: 'Docs', quickStart: 'Inicio Rápido', agentOS: 'Sistema Operativo de Agentes', agentOSDesc: 'Grado de producción, impulsado por Rust.' }
+    footer: { description: 'Librefang es un Sistema Operativo de Agentes de grado de producción construido en Rust. Código abierto, enfocado en privacidad y diseñado para operación autónoma 24/7.', privacy: 'Privacidad', license: 'Licencia', project: 'Proyecto', community: 'Comunidad', issues: 'Issues', discussions: 'Discusiones', docs: 'Docs', quickStart: 'Inicio Rápido', agentOS: 'Sistema Operativo de Agentes', agentOSDesc: 'Grado de producción, impulsado por Rust.' },
+    githubStats: { title: 'Únete a Nuestra Comunidad', subtitle: 'Ayúdanos a construir el futuro de los agentes de IA autónomos', stars: 'Estrellas', forks: 'Forks', issues: 'Issues', lastUpdate: 'Última Actualización', starUs: 'Dános Estrella', discuss: 'Discutir' },
+    contributing: { title: 'Contribuir', subtitle: 'Ayuda a construir el futuro de la IA autónoma', code: 'Código', codeDesc: 'Contribuye con funciones, corrige errores o mejora la documentación', submitPR: 'Enviar PR', report: 'Reportar Errores', reportDesc: '¿Encontraste un problema? Ayúdanos a mejorarlo', openIssue: 'Abrir Issue', community: 'Comunidad', communityDesc: 'Únete a las discusiones y ayuda a otros usuarios', joinDiscuss: 'Unirse a la Discusión' }
   }
 }
 
