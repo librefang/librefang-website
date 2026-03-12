@@ -78,7 +78,7 @@ async function handleVisits(env, cors) {
 function handleScript(cors) {
   const script = `(function() {
   var page = window.location.pathname || 'home';
-  fetch('https://librefang-visit-counter.suzukaze-haduki.workers.dev/api/track', {
+  fetch('https://counter.librefang.ai/api/track', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ page: page }),

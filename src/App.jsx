@@ -493,7 +493,7 @@ function GitHubStats({ t }) {
     queryKey: ['githubStats'],
     queryFn: async () => {
       try {
-        const res = await fetch('https://librefang-github-stats.suzukaze-haduki.workers.dev/api/github')
+        const res = await fetch('https://stats.librefang.ai/api/github')
         if (!res.ok) throw new Error('Failed to fetch')
         return res.json()
       } catch {
@@ -508,7 +508,7 @@ function GitHubStats({ t }) {
     queryKey: ['docsVisits'],
     queryFn: async () => {
       try {
-        const res = await fetch('https://librefang-visit-counter.suzukaze-haduki.workers.dev/api')
+        const res = await fetch('https://counter.librefang.ai/api')
         if (!res.ok) return { total: 0 }
         return res.json()
       } catch {
