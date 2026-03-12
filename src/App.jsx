@@ -60,7 +60,7 @@ function Header({ t }) {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <a href="/" className="flex items-center gap-3">
           <div className="flex items-center justify-center p-1">
-            <img src="/logo.png" alt="Librefang Logo" width="32" height="32" className="rounded-md" />
+            <img src="/logo.png" alt="Librefang Logo" width="32" height="32" className="rounded-md" loading="lazy" decoding="async" />
           </div>
           <span className="font-extrabold text-2xl tracking-tight">Librefang</span>
         </a>
@@ -82,7 +82,7 @@ function Header({ t }) {
             </button>
             <div className={`absolute right-0 mt-2 w-40 bg-[#161b22] border border-gray-700/50 rounded-md shadow-2xl ${langOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-300 z-50`} role="menu">
               {languages.map((lang, i) => (
-                <a key={lang.code} href={lang.url} className={`block px-5 py-3 text-sm font-bold transition-colors ${i === 0 ? 'bg-primary/10 text-primary rounded-t-md' : 'text-gray-400 hover:bg-white/10 hover:text-gray-100'} ${i === languages.length - 1 ? 'rounded-b-md' : ''}`}>
+                <a key={lang.code} href={lang.url} role="menuitem" className={`block px-5 py-3 text-sm font-bold transition-colors ${i === 0 ? 'bg-primary/10 text-primary rounded-t-md' : 'text-gray-400 hover:bg-white/10 hover:text-gray-100'} ${i === languages.length - 1 ? 'rounded-b-md' : ''}`}>
                   {lang.name}
                 </a>
               ))}
@@ -448,7 +448,7 @@ function Footer({ t }) {
         <div className="flex flex-col items-center md:items-start gap-6">
           <a href="/" className="flex items-center gap-3">
             <div className="flex items-center justify-center">
-              <img src="/logo.png" alt="Librefang Logo" width="32" height="32" className="rounded-md" />
+              <img src="/logo.png" alt="Librefang Logo" width="32" height="32" className="rounded-md" loading="lazy" decoding="async" />
             </div>
             <span className="font-black text-2xl tracking-tight text-white">Librefang</span>
           </a>
@@ -500,13 +500,15 @@ function App() {
 
   useEffect(() => {
     const path = window.location.pathname
-    if (path.startsWith('/zh-TW')) setLang('zh-TW')
-    else if (path.startsWith('/zh')) setLang('zh')
-    else if (path.startsWith('/de')) setLang('de')
-    else if (path.startsWith('/ja')) setLang('ja')
-    else if (path.startsWith('/ko')) setLang('ko')
-    else if (path.startsWith('/es')) setLang('es')
-    else setLang('en')
+    let detectedLang = 'en'
+    if (path.startsWith('/zh-TW')) detectedLang = 'zh-TW'
+    else if (path.startsWith('/zh')) detectedLang = 'zh'
+    else if (path.startsWith('/de')) detectedLang = 'de'
+    else if (path.startsWith('/ja')) detectedLang = 'ja'
+    else if (path.startsWith('/ko')) detectedLang = 'ko'
+    else if (path.startsWith('/es')) detectedLang = 'es'
+    setLang(detectedLang)
+    document.documentElement.lang = detectedLang
   }, [])
 
   const currentT = translations[lang]
