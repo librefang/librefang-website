@@ -1,21 +1,19 @@
-// GitHub API module
+// GitHub Stats Worker
 
-export const handleGitHubApi = async (request, env, cors) => {
-  const url = new URL(request.url)
-  const path = url.pathname
+export default {
+  async fetch(request, env) {
+    return handleFetch(request, env)
+  },
 
-  // GET /api/github
-  if (path === '/api/github' && request.method === 'GET') {
-    return handleGitHubStats(request, env, cors)
-  }
-
-  return null
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(recordDailyStars(env))
+  },
 }
 
-export const recordDailyStars = async (env) => {
+async function recordDailyStars(env) {
   const headers = {
     'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'LibrefangCounter/1.0',
+    'User-Agent': 'LibrefangStats/1.0',
   }
 
   if (env.GITHUB_TOKEN) {
@@ -27,7 +25,7 @@ export const recordDailyStars = async (env) => {
     if (res.ok) {
       const data = await res.json()
       const today = new Date().toISOString().split('T')[0]
-      await env.VISIT_COUNTER.put('stars_' + today, String(data.stargazers_count || 0))
+      await env.KV.put('stars_' + today, String(data.stargazers_count || 0))
       console.log('Recorded stars:', today, data.stargazers_count)
     }
   } catch (e) {
@@ -35,15 +33,37 @@ export const recordDailyStars = async (env) => {
   }
 }
 
-async function handleGitHubStats(request, env, cors) {
+function handleFetch(request, env) {
+  const url = new URL(request.url)
+  const path = url.pathname
+
+  const cors = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  }
+
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { headers: cors })
+  }
+
+  // GET /api/github
+  if (path === '/api/github' && request.method === 'GET') {
+    return handleGitHubStats(env, cors)
+  }
+
+  return new Response('Not Found', { status: 404 })
+}
+
+async function handleGitHubStats(env, cors) {
   const cacheKey = 'github_stats'
   const cacheTimeKey = 'github_stats_time'
   const cacheDuration = 1000 * 60 * 30 // 30 minutes
 
   try {
     // Check cache
-    const cached = await env.VISIT_COUNTER.get(cacheKey)
-    const cacheTime = parseInt(await env.VISIT_COUNTER.get(cacheTimeKey) || '0', 10)
+    const cached = await env.KV.get(cacheKey)
+    const cacheTime = parseInt(await env.KV.get(cacheTimeKey) || '0', 10)
 
     if (cached && cacheTime && (Date.now() - cacheTime < cacheDuration)) {
       return new Response(cached, {
@@ -54,7 +74,7 @@ async function handleGitHubStats(request, env, cors) {
     // Fetch from GitHub
     const headers = {
       'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'LibrefangCounter/1.0',
+      'User-Agent': 'LibrefangStats/1.0',
     }
 
     if (env.GITHUB_TOKEN) {
@@ -73,9 +93,9 @@ async function handleGitHubStats(request, env, cors) {
       return sum + (rel.assets?.reduce((s, a) => s + (a.download_count || 0), 0) || 0)
     }, 0)
 
-    // Record today's stars for history
+    // Record today's stars
     const today = new Date().toISOString().split('T')[0]
-    await env.VISIT_COUNTER.put('stars_' + today, String(repo.stargazers_count || 0))
+    await env.KV.put('stars_' + today, String(repo.stargazers_count || 0))
 
     // Get last 30 days history
     const history = []
@@ -83,7 +103,7 @@ async function handleGitHubStats(request, env, cors) {
       const d = new Date()
       d.setDate(d.getDate() - i)
       const dateStr = d.toISOString().split('T')[0]
-      const stars = await env.VISIT_COUNTER.get('stars_' + dateStr)
+      const stars = await env.KV.get('stars_' + dateStr)
       if (stars) {
         history.push({ date: dateStr, stars: parseInt(stars, 10) })
       }
@@ -102,8 +122,8 @@ async function handleGitHubStats(request, env, cors) {
     const json = JSON.stringify(result)
 
     // Cache
-    await env.VISIT_COUNTER.put(cacheKey, json)
-    await env.VISIT_COUNTER.put(cacheTimeKey, String(Date.now()))
+    await env.KV.put(cacheKey, json)
+    await env.KV.put(cacheTimeKey, String(Date.now()))
 
     return new Response(json, {
       headers: { 'Content-Type': 'application/json', ...cors }

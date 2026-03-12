@@ -1,1 +1,2 @@
-workers/visit-counter/.wrangler/
+workers/*/.wrangler/
+workers/*/node_modules/

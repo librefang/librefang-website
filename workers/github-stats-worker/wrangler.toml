@@ -1,0 +1,11 @@
+name = "librefang-github-stats"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "3ddec4f5f8024982b1ccd49fa6b00e3b"
+
+# 每天 UTC 0点执行，记录star历史
+[triggers]
+crons = ["0 0 * * *"]
