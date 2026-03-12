@@ -676,6 +676,8 @@ function App() {
     document.documentElement.lang = detectedLang
   }, [])
 
+  const currentT = translations[lang]
+
   useEffect(() => {
     if (currentT?.meta) {
       document.title = currentT.meta.title
@@ -685,8 +687,6 @@ function App() {
       if (ogDesc) ogDesc.setAttribute('content', currentT.meta.description)
     }
   }, [lang, currentT])
-
-  const currentT = translations[lang]
 
   return (
     <div className="bg-background-light font-display text-slate-900 antialiased overflow-x-hidden" style={{ background: '#080c10', minHeight: '100vh' }}>
