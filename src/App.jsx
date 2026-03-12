@@ -532,6 +532,22 @@ function GitHubStats({ t }) {
     return sum + assetDownloads
   }, 0) ?? 0
 
+  const { data: docsData } = useQuery({
+    queryKey: ['docsVisits'],
+    queryFn: async () => {
+      try {
+        const res = await fetch('https://librefang-counter.YOUR_NAME.workers.dev/api')
+        if (!res.ok) return { total: 0 }
+        return res.json()
+      } catch {
+        return { total: 0 }
+      }
+    },
+    staleTime: 1000 * 60 * 5,
+    retry: 0,
+  })
+
+  const docsVisits = docsData?.total ?? 0
   const stars = repoData?.stargazers_count ?? (repoError ? null : 0)
   const forks = repoData?.forks_count ?? 0
   const commits = commitsData?.[0]?.sha || ''
@@ -560,7 +576,7 @@ function GitHubStats({ t }) {
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.downloads || 'Downloads'}</div>
           </div>
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
-            <div className="text-3xl font-black text-primary mb-1">12.5k</div>
+            <div className="text-3xl font-black text-primary mb-1">{docsVisits >= 1000 ? `${(docsVisits/1000).toFixed(1)}k` : docsVisits}</div>
             <div className="text-gray-400 font-semibold text-sm">{t.githubStats?.docsVisits || 'Docs Visits'}</div>
           </div>
           <div className="text-center p-5 rounded-2xl bg-white/5 border border-gray-700/30 hover:border-primary/50 transition-colors">
