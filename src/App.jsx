@@ -110,7 +110,7 @@ function Header({ t }) {
   )
 }
 
-function Hero() {
+function Hero({ t }) {
   const { data: release, isLoading } = useQuery({
     queryKey: ['latestRelease'],
     queryFn: async () => {
@@ -174,7 +174,7 @@ function Hero() {
   )
 }
 
-function Stats() {
+function Stats({ t }) {
   return (
     <section className="px-6 py-20">
       <div className="max-w-5xl mx-auto">
@@ -196,7 +196,7 @@ function Stats() {
   )
 }
 
-function Features() {
+function Features({ t }) {
   return (
     <section className="px-6 py-32 bg-[#0d1117] rounded-section mx-4 md:mx-12" id="features">
       <div className="max-w-7xl mx-auto space-y-20">
@@ -221,7 +221,7 @@ function Features() {
   )
 }
 
-function Comparison() {
+function Comparison({ t }) {
   return (
     <section className="px-6 py-32" id="comparison">
       <div className="max-w-6xl mx-auto">
@@ -277,7 +277,7 @@ function Comparison() {
   )
 }
 
-function Workflows() {
+function Workflows({ t }) {
   return (
     <section className="px-6 py-32">
       <div className="max-w-7xl mx-auto space-y-20">
@@ -301,7 +301,7 @@ function Workflows() {
   )
 }
 
-function Install() {
+function Install({ t }) {
   const [copied, setCopied] = useState(false)
   const copyCommand = () => {
     navigator.clipboard.writeText('curl -fsSL https://librefang.sh/install | sh')
@@ -412,7 +412,7 @@ function Install() {
   )
 }
 
-function FAQ() {
+function FAQ({ t }) {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
@@ -439,7 +439,7 @@ function FAQ() {
   )
 }
 
-function Footer() {
+function Footer({ t }) {
   return (
     <footer className="px-6 py-20 border-t border-gray-700/50 bg-white/5">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
@@ -510,15 +510,15 @@ function App() {
     <div className="bg-background-light font-display text-slate-900 antialiased overflow-x-hidden" style={{ background: '#080c10', minHeight: '100vh' }}>
       <Header t={currentT} />
       <main>
-        <Hero />
-        <Stats />
-        <Features />
-        <Comparison />
-        <Workflows />
-        <Install />
-        <FAQ />
+        <Hero t={currentT} />
+        <Stats t={currentT} />
+        <Features t={currentT} />
+        <Comparison t={currentT} />
+        <Workflows t={currentT} />
+        <Install t={currentT} />
+        <FAQ t={currentT} />
       </main>
-      <Footer />
+      <Footer t={currentT} />
     </div>
   )
 }
