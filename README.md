@@ -29,6 +29,25 @@ The repository currently covers:
 - `vite-plugin-pwa`
 - Cloudflare Workers + KV for stats endpoints
 
+## Requirements
+
+- Node.js LTS
+- pnpm
+- Wrangler CLI if you need to deploy or manage the workers
+
+## Architecture
+
+The production setup is split into three parts:
+
+1. Static Vite site
+   - Serves the landing page, localized routes, metadata, install scripts, and PWA assets
+2. GitHub stats worker
+   - Proxies GitHub data, adds caching, and stores daily history in KV
+3. Visit counter worker
+   - Tracks page visits and serves a small tracking script consumed by the website
+
+The frontend is intentionally thin. Most dynamic behavior is read-only and based on remote fetches rather than local application state.
+
 ## Local Development
 
 ### Install dependencies
@@ -103,6 +122,8 @@ The site runs locally without extra setup, but some sections depend on external 
   - The `Outfit` font is loaded from `fonts.googleapis.com` and `fonts.gstatic.com`
 - Google Analytics
   - `index.html` includes `gtag`
+
+In local development, these requests still target the production external endpoints unless you change the source code.
 
 ## Content Maintenance
 
@@ -252,6 +273,35 @@ If your platform supports `_headers` and `_redirects`, you can reuse the files i
 - Security headers
 - CSP rules
 - Static asset cache policies
+
+## Update Workflow
+
+Common maintenance tasks usually fall into one of these buckets:
+
+### Landing page copy or visuals
+
+- Update copy in `src/i18n.js`
+- Update layout or section logic in `src/App.jsx`
+- Replace or add assets in `public/`
+
+### Installer or release metadata
+
+- Update `install-manifest.json`
+- Keep root and `public/` installer scripts aligned
+- Verify any public install URLs shown in the UI still match the actual hosted installer endpoints
+
+### Analytics or stats infrastructure
+
+- Update worker code under `workers/`
+- Re-deploy the affected worker
+- Update hardcoded frontend endpoints and CSP if domains changed
+
+## Known Maintenance Constraints
+
+- Some install-related files exist in both the repository root and `public/`; changing only one copy is usually incorrect
+- Stats and visit APIs are hardcoded to production domains in the frontend
+- CSP in `public/_headers` can block new third-party assets or scripts if you forget to allowlist them
+- Worker deployment is not wired into the frontend build; it is a separate operational step
 
 ## Maintenance Notes
 
