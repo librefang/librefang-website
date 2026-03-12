@@ -589,20 +589,19 @@ function GitHubStats({ t }) {
           </div>
         </div>
 
-        {/* Star History Mini Chart */}
+        {/* Star History */}
         <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-gray-700/30">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-bold text-white">{t.githubStats?.starHistory || 'Star History'}</h3>
             <a href="https://star-history.com/#librefang/librefang" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">View Full Chart →</a>
           </div>
-          <div className="h-32 flex items-end gap-1">
-            {[45, 52, 48, 61, 55, 68, 72, 65, 78, 82, 90, 85, 95, 102, 98, 110, 108, 115, 125, 120, 132, 145, 152, 148].map((val, i) => (
-              <div key={i} className="flex-1 bg-primary/60 hover:bg-primary transition-colors rounded-t" style={{ height: `${(val / 160) * 100}%` }} title={`${val} stars`}></div>
-            ))}
-          </div>
-          <div className="flex justify-between mt-2 text-xs text-gray-500">
-            <span>6 months ago</span>
-            <span>Now</span>
+          <div className="relative aspect-video rounded-lg overflow-hidden bg-[#080c10]">
+            <iframe
+              src="https://star-history.com/embed?repos=librefang/librefang&type=date&legend=top-left"
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              title="Star History"
+            />
           </div>
         </div>
         <div className="flex justify-center gap-6 mt-12">
