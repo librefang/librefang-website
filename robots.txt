@@ -9,4 +9,4 @@ Allow: /
 # User-agent: PerplexityBot
 # Disallow: /
 
-Sitemap: https://openfang.cc/sitemap-index.xml
+Sitemap: https://librefang.ai/sitemap-index.xml
