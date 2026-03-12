@@ -493,7 +493,7 @@ function GitHubStats({ t }) {
     queryKey: ['githubStats'],
     queryFn: async () => {
       try {
-        const res = await fetch('https://stats.librefang.ai/api/github')
+        const res = await fetch('https://librefang-github-stats.suzukaze-haduki.workers.dev/api/github')
         if (!res.ok) throw new Error('Failed to fetch')
         return res.json()
       } catch {
