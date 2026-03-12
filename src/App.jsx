@@ -197,6 +197,7 @@ function Stats({ t }) {
 }
 
 function Features({ t }) {
+  const featureIcons = ['movie_edit', 'person_search', 'radar', 'trending_up', 'manage_search', 'rss_feed']
   return (
     <section className="px-6 py-32 bg-[#0d1117] rounded-section mx-4 md:mx-12" id="features">
       <div className="max-w-7xl mx-auto space-y-20">
@@ -206,10 +207,10 @@ function Features({ t }) {
           <div className="h-2 w-32 bg-primary mx-auto rounded-full"></div>
         </header>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, i) => (
+          {t.featureCards.map((feature, i) => (
             <article key={i} className="bg-[#161b22] p-10 rounded-[2.5rem] border border-gray-700/50 hover:border-primary/50 transition-all duration-500 group hover:-translate-y-3 shadow-sm">
               <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                <MaterialIcon name={feature.icon} className="text-4xl font-bold" />
+                <MaterialIcon name={featureIcons[i]} className="text-4xl font-bold" />
               </div>
               <h3 className="text-2xl font-extrabold mb-5 text-white">{feature.title}</h3>
               <p className="text-gray-400 text-lg leading-relaxed">{feature.description}</p>
@@ -226,17 +227,17 @@ function Comparison({ t }) {
     <section className="px-6 py-32" id="comparison">
       <div className="max-w-6xl mx-auto">
         <header className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-white">Librefang vs OpenClaw vs ZeroClaw</h2>
-          <p className="text-gray-400 text-xl">Built in Rust. Engineered for production, not prototypes.</p>
+          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-white">{t.comparison.librefangVs}</h2>
+          <p className="text-gray-400 text-xl">{t.comparison.subtitle2}</p>
         </header>
         <div className="hidden md:block overflow-hidden rounded-[3rem] border border-gray-700/50 bg-white/5 backdrop-blur-xl">
           <table className="w-full text-left">
             <thead className="bg-gray-800 text-gray-300">
               <tr>
-                <th scope="col" className="p-8 font-bold text-lg">Metric</th>
-                <th scope="col" className="p-8 font-bold text-lg text-center border-l border-gray-700/50">OpenClaw</th>
-                <th scope="col" className="p-8 font-bold text-lg text-center border-l border-gray-700/50">ZeroClaw</th>
-                <th scope="col" className="p-8 font-bold text-lg text-center text-primary border-l border-gray-700/50 bg-primary/5">Librefang</th>
+                <th scope="col" className="p-8 font-bold text-lg">{t.comparison.metric}</th>
+                <th scope="col" className="p-8 font-bold text-lg text-center border-l border-gray-700/50">{t.comparison.openclaw}</th>
+                <th scope="col" className="p-8 font-bold text-lg text-center border-l border-gray-700/50">{t.comparison.zeroclaw}</th>
+                <th scope="col" className="p-8 font-bold text-lg text-center text-primary border-l border-gray-700/50 bg-primary/5">{t.comparison.librefang}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700/50">
@@ -261,7 +262,7 @@ function Comparison({ t }) {
               <h3 className="text-sm font-black uppercase tracking-widest text-primary mb-6">{item.title}</h3>
               <dl className="space-y-4">
                 <div className="flex justify-between items-center py-4 border-b border-gray-700/50">
-                  <dt className="text-gray-400 font-medium">OpenClaw / ZeroClaw</dt>
+                  <dt className="text-gray-400 font-medium">{t.comparison.openclaw} / {t.comparison.zeroclaw}</dt>
                   <dd className="text-gray-400">{i === 0 ? '2.5s – 4s+' : i === 1 ? '2–3 layers' : '8–15'}</dd>
                 </div>
                 <div className="flex justify-between items-center py-4">
@@ -278,18 +279,19 @@ function Comparison({ t }) {
 }
 
 function Workflows({ t }) {
+  const workflowIcons = ['video_library', 'filter_alt', 'monitoring', 'hub', 'sync_alt', 'security']
   return (
     <section className="px-6 py-32">
       <div className="max-w-7xl mx-auto space-y-20">
         <header className="text-center space-y-6">
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">Replace Entire Workflows with a Single Hand</h2>
-          <p className="text-gray-400 text-xl max-w-3xl mx-auto">Librefang doesn't just assist — it takes over. These are the operations you'd otherwise hire people for.</p>
+          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">{t.workflows.workflow1Title}</h2>
+          <p className="text-gray-400 text-xl max-w-3xl mx-auto">{t.workflows.workflow1Desc}</p>
         </header>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {workflows.map((workflow, i) => (
+          {t.workflowCards.map((workflow, i) => (
             <article key={i} className="bg-white/5 rounded-[2.5rem] border border-gray-700/50 p-8 space-y-6 hover:border-primary/50 transition-all group">
               <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition-colors">
-                <MaterialIcon name={workflow.icon} className="text-4xl text-primary group-hover:text-white" />
+                <MaterialIcon name={workflowIcons[i]} className="text-4xl text-primary group-hover:text-white" />
               </div>
               <h3 className="text-2xl font-extrabold text-white">{workflow.title}</h3>
               <p className="text-gray-400 text-lg leading-relaxed">{workflow.description}</p>
@@ -313,8 +315,8 @@ function Install({ t }) {
     <section className="px-6 py-32 bg-[#0d1117] rounded-section mx-4 md:mx-12" id="install">
       <div className="max-w-5xl mx-auto space-y-16">
         <header className="text-center space-y-6">
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">One Command. Then Walk Away.</h2>
-          <p className="text-gray-400 text-xl">Single binary. No Docker required. Runs on your laptop, a VPS, or a Raspberry Pi. Start autonomous agents in under 60 seconds.</p>
+          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">{t.install.singleBinary}</h2>
+          <p className="text-gray-400 text-xl">{t.install.singleBinaryDesc}</p>
         </header>
         <div className="rounded-[2.5rem] overflow-hidden shadow-3xl bg-[#080c10] border border-gray-700/50">
           <div className="h-12 flex items-center px-6 justify-between">
@@ -347,7 +349,7 @@ function Install({ t }) {
               <div className="size-14 bg-primary/10 rounded-xl flex items-center justify-center">
                 <MaterialIcon name="checklist" className="text-primary text-3xl" />
               </div>
-              <h3 className="text-2xl font-extrabold text-white">Requirements</h3>
+              <h3 className="text-2xl font-extrabold text-white">{t.install.requirements}</h3>
             </div>
             <ul className="space-y-3 text-gray-400">
               <li className="flex items-center gap-3"><span className="text-primary">•</span> Linux / macOS / Windows</li>
@@ -361,7 +363,7 @@ function Install({ t }) {
               <div className="size-14 bg-primary/10 rounded-xl flex items-center justify-center">
                 <MaterialIcon name="settings_suggest" className="text-primary text-3xl" />
               </div>
-              <h3 className="text-2xl font-extrabold text-white">What You Get</h3>
+              <h3 className="text-2xl font-extrabold text-white">{t.install.whatYouGet}</h3>
             </div>
             <ul className="space-y-3 text-gray-400">
               <li className="flex items-center gap-3"><span className="text-primary">•</span> 7 built-in autonomous Hands</li>
@@ -372,29 +374,29 @@ function Install({ t }) {
           </article>
         </div>
         <div className="bg-white/5 rounded-[2rem] border border-gray-700/50 p-10 space-y-8">
-          <h3 className="text-2xl font-extrabold text-center text-white">Three Steps to Autonomous AI</h3>
+          <h3 className="text-2xl font-extrabold text-center text-white">{t.install.threeSteps}</h3>
           <ol className="space-y-6">
             <li className="flex gap-6 items-start">
               <div className="size-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-black text-lg flex-shrink-0">1</div>
               <div className="flex-1 pt-1">
-                <h4 className="font-bold text-lg mb-2 text-white">Install</h4>
+                <h4 className="font-bold text-lg mb-2 text-white">{t.install.install}</h4>
                 <pre className="bg-[#080c10] rounded-xl p-4 text-sm font-mono overflow-x-auto max-w-full border border-gray-700/30"><code><span className="text-primary">curl</span> <span className="text-white">-fsSL https://librefang.sh/install | sh</span><br/><span className="text-gray-500"># Windows PowerShell:</span><br/><span className="text-primary">irm</span> <span className="text-white">https://librefang.sh/install.ps1 | iex</span></code></pre>
               </div>
             </li>
             <li className="flex gap-6 items-start">
               <div className="size-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-black text-lg flex-shrink-0">2</div>
               <div className="flex-1 pt-1">
-                <h4 className="font-bold text-lg mb-2 text-white">Initialize</h4>
+                <h4 className="font-bold text-lg mb-2 text-white">{t.install.initialize}</h4>
                 <pre className="bg-[#080c10] rounded-xl p-4 text-sm font-mono overflow-x-auto max-w-full border border-gray-700/30"><code><span className="text-primary">librefang init</span><br/><span className="text-gray-500"># Configure your LLM provider and channel tokens</span></code></pre>
-                <p className="text-gray-400 mt-3 text-sm">Follow the interactive setup to connect your LLM API key and messaging channels</p>
+                <p className="text-gray-400 mt-3 text-sm">{t.install.initializeDesc}</p>
               </div>
             </li>
             <li className="flex gap-6 items-start">
               <div className="size-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-black text-lg flex-shrink-0">3</div>
               <div className="flex-1 pt-1">
-                <h4 className="font-bold text-lg mb-2 text-white">Start Agents</h4>
+                <h4 className="font-bold text-lg mb-2 text-white">{t.install.startAgents}</h4>
                 <pre className="bg-[#080c10] rounded-xl p-4 text-sm font-mono overflow-x-auto max-w-full border border-gray-700/30"><code><span className="text-primary">librefang start</span><br/><span className="text-gray-500"># Migrate from OpenClaw:</span><br/><span className="text-primary">librefang migrate</span> <span className="text-white">--from openclaw</span></code></pre>
-                <p className="text-gray-400 mt-3 text-sm">Agents run as background daemons. Use the desktop app or web UI to monitor and manage.</p>
+                <p className="text-gray-400 mt-3 text-sm">{t.install.startAgentsDesc}</p>
               </div>
             </li>
           </ol>
