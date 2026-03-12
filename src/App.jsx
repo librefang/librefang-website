@@ -161,10 +161,10 @@ function Hero({ t }) {
       return res.json()
     },
     staleTime: 1000 * 60 * 60,
-    refetchOnMount: false,
+    initialData: { tag_name: 'v0.3.47' },
   })
 
-  const version = release?.tag_name
+  const version = release?.tag_name || ''
 
   return (
     <header className="relative px-6 pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden">
@@ -179,7 +179,7 @@ function Hero({ t }) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <span>v0.3.47</span> · Rust-Powered · Open Source
+            {version || ''} · Rust-Powered · Open Source
           </div>
           <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-[1.05] bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-100 to-primary flex items-center justify-center lg:justify-start gap-4">
             <img src="/fox-mascot.png" alt="Librefang Mascot" className="w-16 h-16 md:w-20 md:h-20 rounded-xl" />
