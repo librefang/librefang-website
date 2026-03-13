@@ -37,11 +37,7 @@ export default {
 
 async function handleTrack(request, env, cors) {
   try {
-    const text = await request.text()
-    let page = 'home'
-    try {
-      page = JSON.parse(text).page || 'home'
-    } catch (e) {}
+    await request.text()
 
     const today = new Date().toISOString().split('T')[0]
 

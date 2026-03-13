@@ -5,23 +5,6 @@ import { ExternalLink, Globe, ChevronDown, Menu, X, ClipboardCheck, Settings, Ba
 
 const queryClient = new QueryClient()
 
-const features = [
-  { icon: 'movie_edit', title: 'Clip', description: 'Auto-converts YouTube videos into vertical shorts with AI captions and voice-over. Publishes directly to Telegram. Your content pipeline runs itself — no editors needed.' },
-  { icon: 'person_search', title: 'Lead', description: 'Daily autonomous prospect discovery with ICP-based scoring, deduplication, and CSV export. Wake up to a fresh list of qualified leads every morning.' },
-  { icon: 'radar', title: 'Collector', description: 'OSINT-grade intelligence monitoring with change detection. Tracks competitors, news, and signals — alerts you only when something meaningful shifts.' },
-  { icon: 'trending_up', title: 'Predictor', description: 'Superforecasting engine with calibrated probabilistic reasoning. Model market movements and business outcomes before your competitors do.' },
-  { icon: 'manage_search', title: 'Researcher', description: 'Deep autonomous research with credibility evaluation. Produces structured reports with source quality scoring — not just web search summaries.' },
-  { icon: 'rss_feed', title: 'Twitter + Browser', description: 'Autonomous X/Twitter management with human approval gates. Full browser automation with purchase guardrails — power without losing control.' },
-]
-
-const workflows = [
-  { icon: 'video_library', title: 'Content Pipeline', description: 'Clip + Twitter working together: monitor trending videos, cut shorts, add captions, publish to social — all while you\'re offline.' },
-  { icon: 'filter_alt', title: 'Sales Prospecting', description: 'Lead runs nightly: discovers prospects, scores by ICP fit, removes duplicates, exports a clean CSV. Wake up ready to sell.' },
-  { icon: 'monitoring', title: 'Competitive Intelligence', description: 'Collector watches competitor sites, pricing, job boards, and news. Alerts you the moment something changes — not after you notice it.' },
-  { icon: 'hub', title: 'Multi-Agent Orchestration', description: 'Chain Hands with workflow orchestration. Build pipelines like: Researcher → Predictor → Clip → broadcast to 40 channels in one run.' },
-  { icon: 'sync_alt', title: 'Migrate from OpenClaw', description: 'One command migration: librefang migrate --from openclaw. Your agents, memory, and skills transfer without manual reconfiguration.' },
-  { icon: 'security', title: 'Production Security', description: 'WASM sandbox, Merkle audit chain, SSRF protection, prompt injection scanning, GCRA rate limiting — 16 layers so you can deploy with confidence.' },
-]
 
 const comparisonData = [
   { metric: 'Cold Start', openclaw: '2.5s+', zeroclaw: '4s+', librefang: '180ms' },
@@ -462,8 +445,6 @@ function Install({ t }) {
 }
 
 function FAQ({ t }) {
-  const [openIndex, setOpenIndex] = useState(0)
-
   return (
     <section className="px-6 py-32" id="faq">
       <div className="max-w-3xl mx-auto space-y-16">
@@ -547,7 +528,6 @@ function GitHubStats({ t }) {
   const [historyTab, setHistoryTab] = useState('stars')
   const currentHistory = historyTab === 'stars' ? starHistory : historyTab === 'forks' ? forksHistory : historyTab === 'issues' ? issuesHistory : prsHistory
   const currentMax = Math.max(...currentHistory, 1)
-  const currentLabel = historyTab === 'stars' ? (t.githubStats?.stars || 'Stars') : historyTab === 'forks' ? (t.githubStats?.forks || 'Forks') : historyTab === 'issues' ? (t.githubStats?.issues || 'Issues') : (t.githubStats?.prs || 'PRs')
   const currentValue = historyTab === 'stars' ? stars : historyTab === 'forks' ? forks : historyTab === 'issues' ? issues : prs
 
   return (
@@ -741,22 +721,22 @@ function Footer({ t }) {
 }
 
 function App() {
-  const [lang, setLang] = useState(() => {
-    return typeof window !== 'undefined' && window.__INITIAL_LANG__ ? window.__INITIAL_LANG__ : 'en'
-  })
+  const lang = (() => {
+    if (typeof window !== 'undefined' && window.__INITIAL_LANG__) return window.__INITIAL_LANG__
+    if (typeof window === 'undefined') return 'en'
+    const path = window.location.pathname
+    if (path.startsWith('/zh-TW')) return 'zh-TW'
+    if (path.startsWith('/zh')) return 'zh'
+    if (path.startsWith('/de')) return 'de'
+    if (path.startsWith('/ja')) return 'ja'
+    if (path.startsWith('/ko')) return 'ko'
+    if (path.startsWith('/es')) return 'es'
+    return 'en'
+  })()
 
   useEffect(() => {
-    const path = window.location.pathname
-    let detectedLang = 'en'
-    if (path.startsWith('/zh-TW')) detectedLang = 'zh-TW'
-    else if (path.startsWith('/zh')) detectedLang = 'zh'
-    else if (path.startsWith('/de')) detectedLang = 'de'
-    else if (path.startsWith('/ja')) detectedLang = 'ja'
-    else if (path.startsWith('/ko')) detectedLang = 'ko'
-    else if (path.startsWith('/es')) detectedLang = 'es'
-    setLang(detectedLang)
-    document.documentElement.lang = detectedLang
-  }, [])
+    document.documentElement.lang = lang
+  }, [lang])
 
   const currentT = translations[lang]
 

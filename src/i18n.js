@@ -195,8 +195,6 @@ export const translations = {
     docs: { title: '문서', subtitle: 'Librefang 종합 가이드', overview: '개요', overviewDesc: '소개, 빠른 시작, 아키텍처, 디렉토리 구조', yldm: 'YLDM 팀', yldmDesc: '指挥手册, 팀 매트릭스, Ship Faster 워크플로우', automation: '자동화', automationDesc: 'Cron 작업, n8n 웹훅, Gmail 훅', infrastructure: '인프라', infrastructureDesc: '개요, K8s 클러스터, NAS, Cloudflare, 모니터링', workspace: '워크스페이스', workspaceDesc: '핵심 에셋 & AGENTS.md, Skills, 스크립트', operations: '운영', operationsDesc: '설정 변경 규칙, CLI 치트시트', viewAll: '전체 문서 보기' }
   },
   'zh-TW': {
-  },
-  'zh-TW': {
     nav: { features: '功能', comparison: '比較', docs: '文檔', github: 'GitHub' },
     hero: { badge: '開源', title: '代理操作系統', subtitle: 'Rust 構建的生產級自主 AI。180ms 冷啟動，40MB 記憶體，16 層安全，40 個頻道適配器。', getStarted: '開始使用', githubRepo: 'GitHub 倉庫', systemPreview: '系統預覽' },
     stats: { coldStart: '冷啟動', memory: '記憶體', security: '安全層', channels: '頻道' },
